@@ -43,7 +43,7 @@ ng g component auth/login/login-layout --module=auth/login/login.module.ts
 ng g module --routing true auth/registration 
 
 ng g component auth/registration/registration-layout --module=auth/registration/registration.module.ts
-## Dummy command
+
 
 3rd step
 ng g module --routing true auth/login/login-page 
