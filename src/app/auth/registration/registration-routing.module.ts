@@ -11,7 +11,7 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'registration',
+        path: '',
         component: RegistrationLayoutComponent,
         loadChildren: './registration-page/registration-page.module#RegistrationPageModule',
         data: {

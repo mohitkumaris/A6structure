@@ -23,6 +23,18 @@ const routes: Routes = [
   {
     path: '',
     data: {
+      title: 'registration'
+    },
+    children: [
+      {
+        path: 'registration',
+        loadChildren: './auth/registration/registration.module#RegistrationModule'
+      }
+    ]
+  },
+  {
+    path: '',
+    data: {
       title: 'Dashboard'
     },
     children: [
