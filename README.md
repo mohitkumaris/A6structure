@@ -39,12 +39,6 @@ ng g module --routing true auth/login
 2nd step
 ng g component auth/login/login-layout --module=auth/login/login.module.ts
 
-## Dummy command
-ng g module --routing true auth/registration 
-
-ng g component auth/registration/registration-layout --module=auth/registration/registration.module.ts
-
-
 3rd step
 ng g module --routing true auth/login/login-page 
 
