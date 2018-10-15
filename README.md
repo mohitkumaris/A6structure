@@ -25,3 +25,25 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## To Create project folder with Module 
+
+1st step
+ng g module --routing true auth/login 
+
+2nd step
+ng g component auth/login/login-layout --module=auth/login/login.module.ts
+
+
+ng g module --routing true auth/registration 
+
+ng g component auth/registration/registration-layout --module=auth/registration/registration.module.ts
+
+
+3rd step
+ng g module --routing true auth/login/login-page 
+
+4th step
+ng g component --flat auth/login/login-page/login-page --module=auth/login/login-page/login-page.module.ts
+
+
