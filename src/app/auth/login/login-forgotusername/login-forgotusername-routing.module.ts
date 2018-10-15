@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {LoginPageComponent} from './login-page.component';
+import {LoginForgotusernameComponent} from './login-forgotusername.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LoginPageComponent,
+        component: LoginForgotusernameComponent,
         data: {
           title: 'Login'
         }
@@ -24,5 +24,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LoginPageRoutingModule {
+export class LoginForgotUsernameRoutingModule {
 }

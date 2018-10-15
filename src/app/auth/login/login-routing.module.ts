@@ -11,9 +11,25 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'login',
+        path: '',
         component: LoginLayoutComponent,
         loadChildren: './login-page/login-page.module#LoginPageModule',
+        data: {
+          title: 'Login'
+        }
+      },
+      {
+        path: 'forgotpassword',
+        component: LoginLayoutComponent,
+        loadChildren: './login-forgotpassword/login-forgotpassword.module#LoginForgotpasswordModule',
+        data: {
+          title: 'Login'
+        }
+      },
+      {
+        path: 'forgotusername',
+        component: LoginLayoutComponent,
+        loadChildren: './login-forgotusername/login-forgotusername.module#LoginForgotusernameModule',
         data: {
           title: 'Login'
         }

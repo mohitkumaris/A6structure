@@ -26,6 +26,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+## Install bootstrap and ngx-bootstrap for Modals etc.
+
+## First command 
+ng new --routing true del --style=scss
+
 ## To Create project folder with Module 
 
 1st step
@@ -34,11 +39,11 @@ ng g module --routing true auth/login
 2nd step
 ng g component auth/login/login-layout --module=auth/login/login.module.ts
 
-
+## Dummy command
 ng g module --routing true auth/registration 
 
 ng g component auth/registration/registration-layout --module=auth/registration/registration.module.ts
-
+## Dummy command
 
 3rd step
 ng g module --routing true auth/login/login-page 
