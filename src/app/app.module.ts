@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
+import { AuthService } from './shared/services/auth/auth.service';
+import { RestService } from './shared/services/rest/rest.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +17,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService, RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
