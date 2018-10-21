@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-// import Rest service here if required to push headers
+// import {RestService} from '../rest/rest.service';
+import {Observable} from 'rxjs';
+
 
 
 @Injectable()
 export class AuthService {
+  private apiTypes: any;
+  constructor() {
+    // this.apiTypes = restService.apiTypes;
+  }
 
-  constructor() { }
 }

@@ -1,32 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserInterface} from '../../../shared/interfaces/user/user-interface';
+import {Router} from '@angular/router';
+import {DataService} from '../../../shared/services/data/data.service';
+
+
 
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.scss']
+  styleUrls: ['./registration-page.component.scss'],
+  providers: [DataService]
 })
-export class RegistrationPageComponent implements OnInit {
+export class RegistrationPageComponent {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
   show = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-   // private router: Router,
-   // private userService: UserService,
-    // private alertService: AlertService
-    ) { }
+    private formBuilder: FormBuilder, private dataService: DataService, private router: Router) {
+    this.registerForm = this.formBuilder.group({
+      username: [null, Validators.required],
+      password: [null, Validators.required],
+      fName: [null, Validators.required],
+      lName: [null, Validators.required]
+    });
+  }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      organization: ['']
-    });
+
   }
 
   // convenience getter for easy access to form fields
@@ -34,6 +37,7 @@ export class RegistrationPageComponent implements OnInit {
   showOrganization(event: any) {
     this.show = true ? event.target.value === 'Operator' : false;
   }
+
   onSubmit(formValue) {
     this.submitted = true;
 
@@ -42,7 +46,17 @@ export class RegistrationPageComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    // this.loading = true;
+    this.dataService.registerUser(formValue)
+      .subscribe(
+        resp => {
+          console.log('resp ' + resp);
+          //this.router.navigate(['/login']);
+        },
+        error => {
+          console.error(error);
+        });
+
     /*this.userService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(

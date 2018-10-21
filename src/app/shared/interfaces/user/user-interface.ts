@@ -1,11 +1,6 @@
 export interface UserInterface {
-
-  _id: string;
-  email: string;
+  username: string;
   password: string;
-  first_name: string;
-  last_name: string;
-  roles: string;
-  organisation: string;
-
+  fName: string;
+  lName: string;
 }

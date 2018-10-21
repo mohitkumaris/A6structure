@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+
+
 import { AppConfig} from '../../app-config';
-import { Observable} from 'rxjs';
+import { Observable} from 'rxjs/Observable';
 import { map, catchError, finalize } from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+
 const appConfig = new AppConfig();
 
 @Injectable()
 export class RestService {
-  private headers: Headers;
-  private options: RequestOptions;
-  private optionsDelete: RequestOptions;
-
+  private headers: HttpHeaders;
   public apiTypes = {
     'auth': 'auth',
     'app': 'app'
@@ -18,65 +20,71 @@ export class RestService {
 
 
 
-  constructor(private http: Http) {
-    this.pushHeaders();
+  constructor(private http: HttpClient) {
+   // this.pushHeaders();
   }
 
   public pushHeaders() {
-    this.headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'q=0.8;application/json;q=0.9', 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') });
-    this.options = new RequestOptions({ headers: this.headers });
-    this.optionsDelete = new RequestOptions({ headers: this.headers });
+    this.headers = new HttpHeaders({ 'Content-Type': 'application/json',
+      'Accept': 'q=0.8;application/json;q=0.9',
+      'Authorization': 'Bearer ' + localStorage.getItem('accessToken') });
+   // this.options = new RequestOptions({ headers: this.headers });
+   // this.optionsDelete = new RequestOptions({ headers: this.headers });
   }
 
-  //Get Call
+  // Get Call
   public getService(url: string, isAuth?: string): Observable<any> {
     const _url = isAuth === this.apiTypes.auth ? appConfig.appAuthUrl + url : appConfig.appUrl + url;
     // show loader
     return this.http
-      .get(_url, this.options)
+      .get(_url)
       .pipe(
       map(this.fromResponse),
       catchError(this.catchServerError),
       finalize(() => {
-        //hide loader
+        // hide loader
       })
     );
   }
 
-  //Whole Update
+  // Whole Update
   public putService(url: string, param: any, isAuth?: string): Observable<any> {
     const body = JSON.stringify(param);
     const _url = isAuth === this.apiTypes.auth ? appConfig.appAuthUrl + url : appConfig.appUrl + url;
     // show loader
     return this.http
-      .put(_url, body, this.options)
+      .put(_url, body)
       .pipe(
         map(this.fromResponse),
       catchError(this.catchServerError),
       finalize(() => {
-        //hide loader
+        // hide loader
       })
     );
   }
 
-  //Post Call
+  // Post Call
   public postService(url: string, param: any, isAuth?: string): Observable<any> {
-    const body = JSON.stringify(param);
+    // const body = JSON.stringify(param);
+    const body = param;
     const _url = isAuth === this.apiTypes.auth ? appConfig.appAuthUrl + url : appConfig.appUrl + url;
     // show loader
     return this.http
-      .post(_url, body, this.options)
+      .post(_url, body)
       .pipe(
-          map(this.fromResponse),
+          map((response) => {
+            this.fromResponse(response);
+          }),
         catchError(this.catchServerError),
         finalize(() => {
-          //hide loader
+          // hide loader
         })
       );
 
   }
 
-  //All delete
+
+  // All delete
   public deleteService(url: string, param: any, isAuth?: string): Observable<any> {
     const body = JSON.stringify(param);
     const params: URLSearchParams = new URLSearchParams();
@@ -86,30 +94,30 @@ export class RestService {
         params.set(key, val);
       }
     }
-    this.optionsDelete = new RequestOptions({ headers: this.headers, search: params, body: body }); //  ======change
+    // this.optionsDelete = new RequestOptions({ headers: this.headers, search: params, body: body }); //  ======change
     const _url = isAuth === this.apiTypes.auth ? appConfig.appAuthUrl + url : appConfig.appUrl + url;
     // show loader
     return this.http
-      .delete(_url, this.optionsDelete)
+      .delete(_url)
       .pipe(
         map(this.fromResponse),
       catchError(this.catchServerError),
       finalize(() => {
-        //hide loader
+        // hide loader
       })
     );
   }
 
-  //Individual Delete
+  // Individual Delete
   public deleteServiceWithId(url: string, key: string, val: string): Observable<any> {
     /// show loader
     return this.http
-      .delete(appConfig.appUrl + url + '/?' + key + '=' + val, this.options)
+      .delete(appConfig.appUrl + url + '/?' + key + '=' + val)
       .pipe(
         map(this.fromResponse),
       catchError(this.catchServerError),
       finalize(() => {
-        //hide loader
+        // hide loader
       })
     );
   }
@@ -121,7 +129,7 @@ export class RestService {
     const _url = isAuth === this.apiTypes.auth ? appConfig.appAuthUrl + url : appConfig.appUrl + url;
     // show loader
     return this.http
-      .put(_url, body, this.options)
+      .put(_url, body)
       .pipe(
         map(this.fromResponse),
       catchError(this.catchServerError),
@@ -136,7 +144,7 @@ export class RestService {
     const body = JSON.stringify(param);
     // show loader
     return this.http
-      .patch(appConfig.appUrl + url, body, this.options)
+      .patch(appConfig.appUrl + url, body)
       .pipe(
         map(this.fromResponse),
       catchError(this.catchServerError),
@@ -149,30 +157,27 @@ export class RestService {
 
 
 
-//Data from Response
-  public fromResponse(response: Response) {
+// Data from Response
+  public fromResponse(response) {
     if (response.status < 200 || response.status >= 300) {
       throw new Error('Bad response status: ' + response.status);
     }
-    const body = response.json();
+    const body = response.body;
 
     if (body.http_status < 200 || response.status >= 300) {
-      this.catchServerError(body.data);
+      this.catchServerError(body);
     }
 
     return body || {};
   }
 
-  //Catching errors
+  // Catching errors
   public catchServerError(errors: any) {
-    const errorMsg = errors.message || 'Something went wrong on Server!';
-     if (errors) {
-      for (const error in errors) {
-        console.error(error);
-      }
-    }
+    const errorMsg = 'Something went wrong on Server!';
+    console.error(errorMsg);
+    return ErrorObservable.create(new Error(errorMsg));
 
-    return Observable.throw(errorMsg);
+   // return Observable.throwError(errorMsg);
   }
 
 
