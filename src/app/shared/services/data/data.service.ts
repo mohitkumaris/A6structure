@@ -25,10 +25,7 @@ export class DataService {
     const url = `/sample/save`;
     return this.restService.postService(url, sampleData, this.apiTypes.app);
   }
-  registerUser(data: any): Observable<any> {
-    const url = `USER/Register`;
-    return this.restService.postService(url, data, this.apiTypes.app);
-  }
+
 
 }
 

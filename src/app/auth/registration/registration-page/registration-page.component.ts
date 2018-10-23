@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserInterface} from '../../../shared/interfaces/user/user-interface';
 import {Router} from '@angular/router';
-import {DataService} from '../../../shared/services/data/data.service';
+import {AuthService} from '../../../shared/services/auth/auth.service';
+
 
 
 
@@ -10,26 +11,24 @@ import {DataService} from '../../../shared/services/data/data.service';
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss'],
-  providers: [DataService]
+  providers: [AuthService]
 })
-export class RegistrationPageComponent {
+export class RegistrationPageComponent implements OnInit{
   registerForm: FormGroup;
   loading = false;
   submitted = false;
   show = false;
 
   constructor(
-    private formBuilder: FormBuilder, private dataService: DataService, private router: Router) {
+    private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
     this.registerForm = this.formBuilder.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
       fName: [null, Validators.required],
       lName: [null, Validators.required]
     });
-  }
-
-  ngOnInit() {
-
   }
 
   // convenience getter for easy access to form fields
@@ -47,11 +46,11 @@ export class RegistrationPageComponent {
     }
 
     // this.loading = true;
-    this.dataService.registerUser(formValue)
+    this.authService.registerUser(formValue)
       .subscribe(
         resp => {
           console.log('resp ' + resp);
-          //this.router.navigate(['/login']);
+          this.router.navigate(['/login']);
         },
         error => {
           console.error(error);
