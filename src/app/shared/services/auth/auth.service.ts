@@ -16,4 +16,8 @@ export class AuthService {
   registerUser(data: any): Observable<any> {
     return this.restService.postService(appConfig.resgisterUrl, data, this.apiTypes.app);
   }
+
+  getUser() : Observable<any> {
+    return this.restService.getService("https://restcountries.eu/rest/v2/name/eesti");
+  }
 }

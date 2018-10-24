@@ -34,7 +34,7 @@ export class RestService {
 
   // Get Call
   public getService(url: string, isAuth?: string): Observable<any> {
-    const _url = isAuth === this.apiTypes.auth ? appConfig.appAuthUrl + url : appConfig.appUrl + url;
+    const _url = url;
     // show loader
     return this.http
       .get(_url)
@@ -159,16 +159,7 @@ export class RestService {
 
 // Data from Response
   public fromResponse(response) {
-    if (response.status < 200 || response.status >= 300) {
-      throw new Error('Bad response status: ' + response.status);
-    }
-    const body = response.body;
-
-    if (body.http_status < 200 || response.status >= 300) {
-      this.catchServerError(body);
-    }
-
-    return body || {};
+    return  response;
   }
 
   // Catching errors

@@ -45,7 +45,13 @@ export class RegistrationPageComponent implements OnInit{
       return;
     }
 
+
+    this.authService.getUser().subscribe((response)=>{
+       console.log(response);
+    });
+
     // this.loading = true;
+    /*
     this.authService.registerUser(formValue)
       .subscribe(
         resp => {
@@ -67,6 +73,7 @@ export class RegistrationPageComponent implements OnInit{
           this.alertService.error(error);
           this.loading = false;
         });*/
+        
   }
 
 }
