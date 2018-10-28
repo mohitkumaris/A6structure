@@ -1,38 +1,37 @@
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AlertComponent } from '../../components/alert/alert.component';
 import { Injectable } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+
 
 @Injectable()
-export class AlertService {
-  private subject = new Subject<any>();
-  private keepAfterNavigationChange = false;
 
-  constructor(private router: Router) {
-    // clear alert message on route change
-    router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        if (this.keepAfterNavigationChange) {
-          // only keep for a single location change
-          this.keepAfterNavigationChange = false;
-        } else {
-          // clear alert
-          this.subject.next();
+export class AlertClass {
+    public modalReference: BsModalRef;
+    constructor(private bsModalService: BsModalService) { }
+    public openModal(msg): void {
+        const initialState = {
+            messageList: [msg],
+            title: 'Alert'
+        };
+
+        this.bsModalService.config.ignoreBackdropClick = true;
+        this.modalReference = this.bsModalService.show(AlertComponent, { initialState });
+        this.modalReference.content.modalTitle = 'Alert';
+        this.modalReference.content.closeBtnName = 'OK';
+        (<AlertComponent>this.modalReference.content).onClose.subscribe(result => {
+            if (result === true) {
+                this.modalReference.hide();
+            } else {
+                this.modalReference.hide();
+            }
+        });
+    }
+    public openStatusModal(result): void {
+        if (result.http_status == "204" || result.http_status == "401" || result.http_status == "500") {
+            let errMsg = result.data[0].attributes["error_message"];
+            this.openModal(errMsg);
         }
-      }
-    });
-  }
 
-  success(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'success', text: message });
-  }
-
-  error(message: string, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'error', text: message });
-  }
-
-  getMessage(): Observable<any> {
-    return this.subject.asObservable();
-  }
+    }
 }
