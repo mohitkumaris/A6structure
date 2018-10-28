@@ -7,7 +7,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import {AuthService} from './shared/services/auth/auth.service';
 import {RestService} from './shared/services/rest/rest.service';
 import { AlertComponent } from './shared/components/alert/alert.component';
-
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { AlertComponent } from './shared/components/alert/alert.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule.forRoot()
   ],
   providers: [AuthService, RestService],
   entryComponents: [AlertComponent],

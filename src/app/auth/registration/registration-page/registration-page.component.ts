@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserInterface} from '../../../shared/interfaces/user/user-interface';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../shared/services/auth/auth.service';
+import {AlertClass} from '../../../shared/services/common/alert';
 
 
 
@@ -11,16 +12,17 @@ import {AuthService} from '../../../shared/services/auth/auth.service';
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss'],
-  providers: [AuthService]
+  providers: [AuthService, AlertClass]
 })
-export class RegistrationPageComponent implements OnInit{
+export class RegistrationPageComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
   show = false;
 
   constructor(
-    private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+    private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private alert: AlertClass) {
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -46,20 +48,26 @@ export class RegistrationPageComponent implements OnInit{
     }
 
 
-    this.authService.getUser().subscribe((response)=>{
+    this.authService.getUser().subscribe((response) => {
        console.log(response);
     });
 
     // this.loading = true;
-    /*
+
     this.authService.registerUser(formValue)
       .subscribe(
         resp => {
-          console.log('resp ' + resp);
-          this.router.navigate(['/login']);
+          // console.log('resp ' + resp);
+          // Works for 204 401 500 only
+          // this.alert.openStatusModal(resp, 'Registration');
+
+          // Demo puporse
+          this.alert.openModal('Registration successful', 'Registration', '/login');
         },
         error => {
-          console.error(error);
+          // Show Error
+          console.log(error);
+          this.alert.openModal(error, 'Error');
         });
 
     /*this.userService.register(this.registerForm.value)
@@ -73,7 +81,7 @@ export class RegistrationPageComponent implements OnInit{
           this.alertService.error(error);
           this.loading = false;
         });*/
-        
+
   }
 
 }

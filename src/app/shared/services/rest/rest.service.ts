@@ -72,9 +72,7 @@ export class RestService {
     return this.http
       .post(_url, body)
       .pipe(
-          map((response) => {
-            this.fromResponse(response);
-          }),
+        map(this.fromResponse),
         catchError(this.catchServerError),
         finalize(() => {
           // hide loader

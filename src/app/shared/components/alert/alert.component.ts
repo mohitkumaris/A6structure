@@ -10,7 +10,7 @@ export class AlertComponent implements OnInit {
 
   modalTitle: string;
   public closeBtnName: string;
-  public messageList= [];
+  public messageList = [];
   public onClose: Subject<boolean>;
 
   constructor() { }
@@ -18,11 +18,11 @@ export class AlertComponent implements OnInit {
   ngOnInit() {
     this.onClose = new Subject();
   }
- 
   confirm() {
     this.onClose.next(true);
   }
-   //For not --- can be used in future
+
+  // For not --- can be used in future
   decline() {
     this.onClose.next(false);
   }

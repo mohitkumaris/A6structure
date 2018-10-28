@@ -25,15 +25,9 @@ export class DashboardTablesComponent implements OnInit {
   public getCountries() {
     this.authService.getUser()
       .subscribe(result => {
-        //Works for 204 401 500 only
-        this.alert.openStatusModal(result);
-
-        //Demo puporse
-        this.alert.openModal("Alert works on success!!!");
-
+        // Works for 204 401 500 only
       }, error => {
-        //Show Error
-        this.alert.openModal(error);
+        // Show Error
       });
   }
 
