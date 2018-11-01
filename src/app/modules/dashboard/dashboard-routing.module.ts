@@ -18,6 +18,14 @@ const routes: Routes = [
         data: {
           title: 'Sample'
         }
+      },
+      {
+        path: 'createauth',
+        component: DashboardLayoutComponent,
+        loadChildren: './createauth-page/createauth-page.module#CreateauthPageModule',
+        data: {
+          title: 'Sample'
+        }
       }
     ]
   }

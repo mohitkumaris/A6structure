@@ -46,18 +46,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: '',
-    data: {
-      title: 'CreateAuthorization'
-    },
-    children: [
-      {
-        path: 'createauth',
-        loadChildren: './modules/createauthorization/createauthorization.module#CreateauthorizationModule'
-      }
-    ]
-  },
-  {
     path: '**',
     component: PageNotFoundComponent
   }
