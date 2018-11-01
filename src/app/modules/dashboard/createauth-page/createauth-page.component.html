@@ -4,9 +4,11 @@
   </div>
   <div class="card-body">
     <form [formGroup]="AuthForm" (submit)="onSubmit(AuthForm.value)">
+      <!--Form Data-->
       <div class="form-group">
         <label for="Authorization">Authorization#</label>
-      <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#">
+        <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#">
+
         <label for="CustomsProcedure">Custom Procedure</label>
         <select class="dropdown" class="form-control" formControlName="CustomsProcedure">
           <option value="0"></option>
@@ -15,106 +17,144 @@
           <option value="40">mise en libre pratique</option>
           <option value="71">autre régime</option>
         </select>
-        <label for="GeographicalValidity">Geographical Validity</label>
-      <input type="text" class="form-control" formControlName="GeographicalValidity"
-             placeholder="Geographical validity">
-        <label for="StartDate">Start Date</label>
-      <input type="date" class="form-control" formControlName="StartDate" placeholder="Date of start of validity">
-        <label for="ExpirationDate">Expiration Date</label>
-      <input type="date" class="form-control" formControlName="ExpirationDate" placeholder="Expiration date of validity">
-      </div>
-      <div class="card-header">
-        Goods to be Placed
-      </div>
-      <div class="card-body">
-      <div class="form-group" formArrayName="Goods"
-           *ngFor="let item of AuthForm.get('Goods').controls; let i = index;">
-        <div [formGroupName]="i">
-          <label for="CodeNC">CodeNC</label>
-          <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
-            <option value="0"></option>
-            <option value="1">CodeNC1</option>
-            <option value="2">CodeNC2</option>
-            <option value="3">CodeNC3</option>
-          </select>
-          <label for="Designation">Designation</label>
-          <input  type="text" class="form-control" formControlName="Designation" placeholder="Designation">
-          <label for="Quantity">Quantity</label>
-          <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity">
-          <label for="Unit">Period</label>
-          <select class="form-control" formControlName="Unit">
-            <option value="0"></option>
-            <option value="1">Days</option>
-            <option value="2">Month</option>
-            <option value="3">Year</option>
-          </select>
-          <input type="number" class="form-control" formControlName="Number" placeholder="Number">
-          <label for="UnitOfMeasure">Unit Of Measure</label>
-          <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure">
-          <label for="Value">Value</label>
-          <input type="number" class="form-control" formControlName="Value" placeholder="Value">
-        </div>
-      </div>
-      <button class="btn btn-block" type="button" (click)="addGoods()" >Add Goods</button>
-      <button class="btn btn-block" type="button" (click)="removeGoods()" >Remove Goods</button>
-    </div>
 
-      <div class="card-header">
-        Goods to be Processed
+        <label for="GeographicalValidity">Geographical Validity</label>
+        <input type="text" class="form-control" formControlName="GeographicalValidity"
+               placeholder="Geographical validity">
+
+        <label for="StartDate">Start Date</label>
+        <input type="date" class="form-control" formControlName="StartDate" placeholder="Date of start of validity">
+
+        <label for="ExpirationDate">Expiration Date</label>
+        <input type="date" class="form-control" formControlName="ExpirationDate" placeholder="Expiration date of validity">
+
       </div>
+      <!--Form Array: Goods-->
+      <div class="card-header">Goods to be Placed</div>
       <div class="card-body">
-      <div class="form-group" formArrayName="MainProcessed"
-           *ngFor="let item of AuthForm.get('MainProcessed').controls; let i = index;">
-        <div [formGroupName]="i">
-          <label for="CodeNC">CodeNC</label>
-          <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
-            <option value="0"></option>
-            <option value="1">CodeNC1</option>
-            <option value="2">CodeNC2</option>
-            <option value="3">CodeNC3</option>
-          </select>
-          <label for="Designation">Designation</label>
-          <input  type="text" class="form-control" formControlName="Designation" placeholder="Designation">
-          <label for="RateofReturn">Rate of Return</label>
-          <input  type="text" class="form-control" formControlName="RateofReturn" placeholder="Rate of Return">
-          <label for="Ratedeterminationmethod">Rate determination method</label>
-          <input  type="text" class="form-control" formControlName="Ratedeterminationmethod" placeholder="Rate determination method">
-        </div>
-          <div class="card-header">
-            Secondary Products to be Processed
+        <div class="form-group" formArrayName="Goods"
+             *ngFor="let item of AuthForm.get('Goods').controls; let i = index;">
+          <div [formGroupName]="i">
+
+            <label for="CodeNC">CodeNC</label>
+            <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
+              <option value="0"></option>
+              <option value="1">CodeNC1</option>
+              <option value="2">CodeNC2</option>
+              <option value="3">CodeNC3</option>
+            </select>
+
+            <label for="Designation">Designation</label>
+            <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
+
+            <label for="Quantity">Quantity</label>
+            <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity">
+
+            <label for="Unit">Period</label>
+            <select class="form-control" formControlName="Unit">
+              <option value="0"></option>
+              <option value="1">Days</option>
+              <option value="2">Month</option>
+              <option value="3">Year</option>
+            </select>
+
+            <label for="Number">Number</label>
+            <input type="number" class="form-control" formControlName="Number" placeholder="Number">
+
+            <label for="UnitOfMeasure">Unit Of Measure</label>
+            <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure">
+
+            <label for="Value">Value</label>
+            <input type="number" class="form-control" formControlName="Value" placeholder="Value">
+
           </div>
-        <div class="card-body">
-          <div class="form-group" formArrayName="SecondaryProcessed"
-               *ngFor="let item of AuthForm.get('SecondaryProcessed').controls; let j = index;">
-            <div [formGroupName]="j">
+        </div>
+        <button class="btn btn-block" type="button" (click)="addGoods()">Add Goods</button>
+        <button class="btn btn-block" type="button" (click)="removeGoods()">Remove Goods</button>
+      </div>
+      <!--Form Array: Main Processed-->
+      <div class="card-header">Goods to be Processed</div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="MainProcessed"
+             *ngFor="let item of AuthForm.get('MainProcessed').controls; let i = index;">
+          <ng-container [formGroupName]="i">
+            <div>
               <label for="CodeNC">CodeNC</label>
-              <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
+              <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
                 <option value="0"></option>
                 <option value="1">CodeNC1</option>
                 <option value="2">CodeNC2</option>
                 <option value="3">CodeNC3</option>
               </select>
               <label for="Designation">Designation</label>
-              <input  type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
+              <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
               <label for="RateofReturn">Rate of Return</label>
-              <input  type="text" class="form-control" formControlName="RateofReturnSecondary" placeholder="Rate of Return">
+              <input type="text" class="form-control" formControlName="RateofReturn" placeholder="Rate of Return">
               <label for="Ratedeterminationmethod">Rate determination method</label>
-              <input  type="text" class="form-control" formControlName="RatedeterminationmethodSecondary" placeholder="Rate determination method">
+              <input type="text" class="form-control" formControlName="Ratedeterminationmethod" placeholder="Rate determination method">
+              <label for="ProcessingPlace">Processing Place</label>
+              <input type="text" class="form-control" formControlName="ProcessingPlace" placeholder="Processing Place">
             </div>
-
+            <div class="card-header">Secondary Products to be Processed</div>
+            <div class="card-body">
+              <div class="form-group" formArrayName="SecondaryProcessed"
+                   *ngFor="let secondaryProccessedItem of AuthForm.get('MainProcessed').controls[i].get('SecondaryProcessed').value; let j = index;">
+                <div [formGroupName]="j">
+                  <label for="CodeNC">CodeNC</label>
+                  <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
+                    <option value="0"></option>
+                    <option value="1">CodeNC1</option>
+                    <option value="2">CodeNC2</option>
+                    <option value="3">CodeNC3</option>
+                  </select>
+                  <label for="Designation">Designation</label>
+                  <input type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
+                  <label for="RateofReturn">Rate of Return</label>
+                  <input type="text" class="form-control" formControlName="RateofReturnSecondary" placeholder="Rate of Return">
+                  <label for="Ratedeterminationmethod">Rate determination method</label>
+                  <input type="text" class="form-control" formControlName="RatedeterminationmethodSecondary"
+                         placeholder="Rate determination method">
+                </div>
+                <button class="btn btn-block" type="button" (click)="addMainSecondaryProcessed(i)">Add MainSecondaryProcessed</button>
+                <button class="btn btn-block" type="button" (click)="removeMainSecondaryProcessed(i)">Remove MainSecondaryProcessed</button>
+              </div>
+            </div>
+          </ng-container>
         </div>
-        </div>
-          <button class="btn btn-block" type="button" (click)="addSecondaryProcessed()" >Add SecondaryProcessed</button>
-          <button class="btn btn-block" type="button" (click)="removeSecondaryProcessed()" >Remove SecondaryProcessed</button>
       </div>
-      </div>
-      <button class="btn btn-block" type="button" (click)="addMainProcessed()" >Add MainProcessed</button>
-      <button class="btn btn-block" type="button" (click)="removeMainProcessed()" >Remove MainProcessed</button>
-
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Create Authorization</button>
+      <button class="btn btn-block" type="button" (click)="addMainProcessed()">Add MainProcessed</button>
+      <button class="btn btn-block" type="button" (click)="removeMainProcessed()">Remove MainProcessed</button>
+      <!--Form Array: Secondary Processed-->
+      <div class="card-header">Secondary Processed</div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="SecondaryProcessed"
+             *ngFor="let item of AuthForm.get('SecondaryProcessed').controls; let k = index;">
+          <div [formGroupName]="k">
+            <label for="CodeNC">CodeNC</label>
+            <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
+              <option value="0"></option>
+              <option value="1">CodeNC1</option>
+              <option value="2">CodeNC2</option>
+              <option value="3">CodeNC3</option>
+            </select>
+            <label for="Designation">Designation</label>
+            <input type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
+            <label for="RateofReturn">Rate of Return</label>
+            <input type="text" class="form-control" formControlName="RateofReturnSecondary" placeholder="Rate of Return">
+            <label for="Ratedeterminationmethod">Rate determination method</label>
+            <input type="text" class="form-control" formControlName="RatedeterminationmethodSecondary"
+                   placeholder="Rate determination method">
+          </div>
         </div>
+        <button class="btn btn-block" type="button" (click)="addSecondaryProcessed()">Add Secondary Processed</button>
+        <button class="btn btn-block" type="button" (click)="removeSecondaryProcessed(0)">Remove Secondary Processed</button>
+      </div>
+
+
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Authorization</button>
+      </div>
     </form>
   </div>
 
