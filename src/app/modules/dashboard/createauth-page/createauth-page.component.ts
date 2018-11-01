@@ -90,7 +90,7 @@ export class CreateauthPageComponent implements OnInit {
   }
   // Endss: Secondary Processed actions
 
-  public save() {
+  public save(formValue) {
     if (this.AuthForm.invalid) { return; }
     console.log(this.AuthForm.value);
   }
