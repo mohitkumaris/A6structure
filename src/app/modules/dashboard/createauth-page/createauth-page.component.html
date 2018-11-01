@@ -124,33 +124,6 @@
       </div>
       <button class="btn btn-block" type="button" (click)="addMainProcessed()">Add MainProcessed</button>
       <button class="btn btn-block" type="button" (click)="removeMainProcessed()">Remove MainProcessed</button>
-      <!--Form Array: Secondary Processed-->
-      <div class="card-header">Secondary Processed</div>
-      <div class="card-body">
-        <div class="form-group" formArrayName="SecondaryProcessed"
-             *ngFor="let item of AuthForm.get('SecondaryProcessed').controls; let k = index;">
-          <div [formGroupName]="k">
-            <label for="CodeNC">CodeNC</label>
-            <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
-              <option value="0"></option>
-              <option value="1">CodeNC1</option>
-              <option value="2">CodeNC2</option>
-              <option value="3">CodeNC3</option>
-            </select>
-            <label for="Designation">Designation</label>
-            <input type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
-            <label for="RateofReturn">Rate of Return</label>
-            <input type="text" class="form-control" formControlName="RateofReturnSecondary" placeholder="Rate of Return">
-            <label for="Ratedeterminationmethod">Rate determination method</label>
-            <input type="text" class="form-control" formControlName="RatedeterminationmethodSecondary"
-                   placeholder="Rate determination method">
-          </div>
-        </div>
-        <button class="btn btn-block" type="button" (click)="addSecondaryProcessed()">Add Secondary Processed</button>
-        <button class="btn btn-block" type="button" (click)="removeSecondaryProcessed(0)">Remove Secondary Processed</button>
-      </div>
-
-
 
       <div class="form-group">
         <button type="submit" class="btn btn-primary" [disabled]="AuthForm.invalid" (click)="save()">Create Authorization</button>

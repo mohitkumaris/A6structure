@@ -34,8 +34,7 @@ export class CreateauthPageComponent implements OnInit {
       StartDate: '',
       ExpirationDate: '',
       Goods: this.formBuilder.array([this.createGoods()]),
-      MainProcessed: this.formBuilder.array([this.createMainProcesed()]),
-      SecondaryProcessed: this.formBuilder.array([this.createSecondaryProcessed()])
+      MainProcessed: this.formBuilder.array([this.createMainProcesed()])
     });
   }
 
@@ -74,18 +73,6 @@ export class CreateauthPageComponent implements OnInit {
     ctrl.removeAt(1);
   }
   // Ends: Main Processed actions
-
-  // Starts: Secondary Processed actions
-  public addSecondaryProcessed(): void {
-    const ctrl = <FormArray>this.AuthForm.get('SecondaryProcessed') as FormArray;
-    ctrl.push(this.createSecondaryProcessed());
-  }
-
-  public removeSecondaryProcessed(idx: number): void {
-    const ctrl = <FormArray>this.AuthForm.get('SecondaryProcessed') as FormArray;
-    ctrl.removeAt(idx);
-  }
-  // Endss: Secondary Processed actions
 
   public save() {
     if (this.AuthForm.invalid) { return; }
