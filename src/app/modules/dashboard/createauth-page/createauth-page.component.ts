@@ -23,9 +23,6 @@ import { FormBuilder, FormGroup, Validators, FormArray, Form } from '@angular/fo
 export class CreateauthPageComponent implements OnInit {
 
   AuthForm: FormGroup;
-  Goods: FormArray;
-  MainProcessed: FormArray;
-  SecondaryProcessed: FormArray;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -44,13 +41,13 @@ export class CreateauthPageComponent implements OnInit {
 
   // Starts: Goods actions
   public addGoods(): void {
-    this.Goods = this.AuthForm.get('Goods') as FormArray;
-    this.Goods.push(this.createGoods());
+    const ctrl = this.AuthForm.get('Goods') as FormArray;
+    ctrl.push(this.createGoods());
   }
 
   public removeGoods(): void {
-    this.Goods = this.AuthForm.get('Goods') as FormArray;
-    this.Goods.removeAt(1);
+    const ctrl = this.AuthForm.get('Goods') as FormArray;
+    ctrl.removeAt(1);
   }
   // Ends: Goods actions
 
@@ -68,13 +65,13 @@ export class CreateauthPageComponent implements OnInit {
   }
 
   public addMainProcessed(): void {
-    this.MainProcessed = this.AuthForm.get('MainProcessed') as FormArray;
-    this.MainProcessed.push(this.createMainProcesed());
+    const ctrl = this.AuthForm.get('MainProcessed') as FormArray;
+    ctrl.push(this.createMainProcesed());
   }
 
   public removeMainProcessed(): void {
-    this.MainProcessed = this.AuthForm.get('MainProcessed') as FormArray;
-    this.MainProcessed.removeAt(1);
+    const ctrl = this.AuthForm.get('MainProcessed') as FormArray;
+    ctrl.removeAt(1);
   }
   // Ends: Main Processed actions
 
