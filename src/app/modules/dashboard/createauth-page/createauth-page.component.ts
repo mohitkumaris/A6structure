@@ -26,7 +26,6 @@ export class CreateauthPageComponent implements OnInit {
   Goods: FormArray;
   MainProcessed: FormArray;
   SecondaryProcessed: FormArray;
-  submitted = false;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -91,12 +90,8 @@ export class CreateauthPageComponent implements OnInit {
   }
   // Endss: Secondary Processed actions
 
-  public onSubmit(formValue) {
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.AuthForm.invalid) {
-      return;
-    }
+  public save() {
+    if (this.AuthForm.invalid) { return; }
     console.log(this.AuthForm.value);
   }
 
