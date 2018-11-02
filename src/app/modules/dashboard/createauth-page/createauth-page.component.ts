@@ -34,7 +34,10 @@ export class CreateauthPageComponent implements OnInit {
       StartDate: '',
       ExpirationDate: '',
       Goods: this.formBuilder.array([this.createGoods()]),
-      MainProcessed: this.formBuilder.array([this.createMainProcesed()])
+      MainProcessed: this.formBuilder.array([this.createMainProcesed()]),
+      OfficesofPlacement: this.formBuilder.array([this.createOfficesofClearance()]),
+      OfficesofClearance: this.formBuilder.array([this.createOfficesofClearance()]),
+      OfficesofControl: this.formBuilder.array([this.createOfficesofControl()])
     });
   }
 
@@ -74,11 +77,51 @@ export class CreateauthPageComponent implements OnInit {
   }
   // Ends: Main Processed actions
 
-  public save() {
+  // Add office of Placement
+  public addOfficesofPlacement(): void {
+    const ctrl = this.AuthForm.get('OfficesofPlacement') as FormArray;
+    ctrl.push(this.createOfficesofPlacement());
+  }
+
+  public removeOfficesofPlacement(i): void {
+    const ctrl = this.AuthForm.get('OfficesofPlacement') as FormArray;
+    ctrl.removeAt(i);
+  }
+
+  // End office of Placement
+
+  // Add office of Clearance
+  public addOfficesofClearance(): void {
+    const ctrl = this.AuthForm.get('OfficesofClearance') as FormArray;
+    ctrl.push(this.createOfficesofClearance());
+  }
+
+  public removeOfficesofClearance(i): void {
+    const ctrl = this.AuthForm.get('OfficesofClearance') as FormArray;
+    ctrl.removeAt(i);
+  }
+
+  // End office of Clearance
+
+  // Add Offices of Control
+  public addOfficesofControl(): void {
+    const ctrl = this.AuthForm.get('OfficesofControl') as FormArray;
+    ctrl.push(this.createOfficesofControl());
+  }
+
+  public removeOfficesofControl(i): void {
+    const ctrl = this.AuthForm.get('OfficesofControl') as FormArray;
+    ctrl.removeAt(i);
+  }
+
+  // End office of Control
+
+  public save(formValue) {
     if (this.AuthForm.invalid) { return; }
     console.log(this.AuthForm.value);
   }
 
+  // Creation of Elements those are adding dynamically
   private createGoods(): FormGroup {
     return this.formBuilder.group({
       CodeNC: '',
@@ -111,6 +154,25 @@ export class CreateauthPageComponent implements OnInit {
     });
   }
 
+  private createOfficesofPlacement(): FormGroup {
+    return this.formBuilder.group({
+      OfficesPlacement: ''
+    });
+  }
+
+  private createOfficesofClearance(): FormGroup {
+    return this.formBuilder.group({
+      OfficesClearance: ''
+    });
+  }
+
+  private createOfficesofControl(): FormGroup {
+    return this.formBuilder.group({
+      OfficesControl: ''
+    });
+  }
+
+// Ends Creation
   // convenience getter for easy access to form fields
   get f() {
     return this.AuthForm.controls;

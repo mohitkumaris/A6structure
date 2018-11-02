@@ -70,7 +70,7 @@
           </div>
         </div>
         <button class="btn btn-block" type="button" (click)="addGoods()">Add Goods</button>
-        <button class="btn btn-block" type="button" (click)="removeGoods()">Remove Goods</button>
+        <button class="btn btn-block" type="button" (click)="removeGoods(i)">Remove Goods</button>
       </div>
       <!--Form Array: Main Processed-->
       <div class="card-header">Goods to be Processed</div>
@@ -124,9 +124,70 @@
       </div>
       <button class="btn btn-block" type="button" (click)="addMainProcessed()">Add MainProcessed</button>
       <button class="btn btn-block" type="button" (click)="removeMainProcessed()">Remove MainProcessed</button>
-
+      <!-- Office of Placement -->
+      <div class="card-header">
+        Offices of Placement
+      </div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="OfficesofPlacement"
+             *ngFor="let item of AuthForm.get('OfficesofPlacement').controls; let i = index;">
+          <div [formGroupName]="i">
+            <label for="OfficesPlacement">Offices of Placement</label>
+            <select class="form-control" formControlName="OfficesPlacement" placeholder="OfficesPlacement">
+              <option value="0"></option>
+              <option value="1">Code Office</option>
+              <option value="2">Office Label</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-block" type="button" (click)="addOfficesofPlacement()">Add Placement</button>
+      <button class="btn btn-block" type="button" (click)="removeOfficesofPlacement(i)">Remove Placement</button>
+      <!-- Ended -->
+      <!-- Office of Clearance -->
+      <div class="card-header">
+        Offices of Clearance
+      </div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="OfficesofClearance"
+             *ngFor="let item of AuthForm.get('OfficesofClearance').controls; let i = index;">
+          <div [formGroupName]="i">
+            <label for="OfficesClearance">Offices of Clearance</label>
+            <select class="form-control" formControlName="OfficesClearance" placeholder="OfficesClearance">
+              <option value="0"></option>
+              <option value="1">Code Office</option>
+              <option value="2">Office Label</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-block" type="button" (click)="addOfficesofClearance()">Add Clearance</button>
+      <button class="btn btn-block" type="button" (click)="removeOfficesofClearance(i)">Remove Clearance</button>
+      <!-- Ended -->
+      <!-- Office of Clearance -->
+      <div class="card-header">
+        Offices of Control
+      </div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="OfficesofControl"
+             *ngFor="let item of AuthForm.get('OfficesofControl').controls; let i = index;">
+          <div [formGroupName]="i">
+            <label for="OfficesofControl">Offices of Control</label>
+            <select class="form-control" formControlName="OfficesControl" placeholder="OfficesControl">
+              <option value="0"></option>
+              <option value="1">Code Office</option>
+              <option value="2">Office Label</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-block" type="button" (click)="addOfficesofControl()">Add Control</button>
+      <button class="btn btn-block" type="button" (click)="removeOfficesofControl(i)">Remove Control</button>
+      <!-- Ended -->
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" [disabled]="AuthForm.invalid" (click)="save()">Create Authorization</button>
+        <button type="submit" class="btn btn-primary" [disabled]="AuthForm.invalid" (click)="save(AuthForm.value)">
+          Create Authorization
+        </button>
       </div>
     </form>
   </div>
