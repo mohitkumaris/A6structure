@@ -14,22 +14,28 @@
  *************************************************************************************/
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, Form } from '@angular/forms';
+import {CreateAuthorizationService} from '../../../shared/services/createauthorization/createAuthorization.service';
+import {CustomProceduresInterface} from '../../../shared/interfaces/createAuthorization/customProcedures-interface';
+import {AlertClass} from '../../../shared/services/common/alert';
 
 @Component({
   selector: 'app-createauth-page',
   templateUrl: './createauth-page.component.html',
-  styleUrls: ['./createauth-page.component.scss']
+  styleUrls: ['./createauth-page.component.scss'],
+  providers: [CreateAuthorizationService, AlertClass]
 })
 export class CreateauthPageComponent implements OnInit {
 
   AuthForm: FormGroup;
+  CustomsProcedure: CustomProceduresInterface[];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private createAuthService: CreateAuthorizationService, private alert: AlertClass) {
+  }
 
   ngOnInit() {
+    this.getCustomProcs();
     this.AuthForm = this.formBuilder.group({
       Authorization: '',
-      CustomsProcedure: '',
       GeographicalValidity: '',
       StartDate: '',
       ExpirationDate: '',
@@ -41,10 +47,21 @@ export class CreateauthPageComponent implements OnInit {
     });
   }
 
+  public getCustomProcs(): void {
+    this.createAuthService.getCustomProcs()
+      .subscribe((res) => {
+        this.CustomsProcedure = res as CustomProceduresInterface[];
+      }, (error) => {
+        this.alert.openModal(error, 'Error');
+      });
+  }
+
+
   // Starts: Goods actions
   public addGoods(): void {
     const ctrl = this.AuthForm.get('Goods') as FormArray;
     ctrl.push(this.createGoods());
+
   }
 
   public removeGoods(): void {

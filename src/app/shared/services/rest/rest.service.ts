@@ -34,7 +34,7 @@ export class RestService {
 
   // Get Call
   public getService(url: string, isAuth?: string): Observable<any> {
-    const _url = url;
+    const _url = appConfig.appUrl + url;
     // show loader
     return this.http
       .get(_url)
