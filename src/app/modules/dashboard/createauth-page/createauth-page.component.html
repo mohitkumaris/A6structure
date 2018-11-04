@@ -7,8 +7,7 @@
       <!--Form Data-->
       <div class="form-group">
         <label class="title" for="Authorization">Authorization#</label>
-        <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#"
-        disabled="disabled">
+        <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#">
 
         <label class="title" for="CustomsProcedure">Custom Procedure</label>
         <select class="dropdown" class="form-control">
@@ -49,7 +48,7 @@
       <div class="card-header">Goods to be Placed</div>
       <div class="card-body">
         <div class="form-group" formArrayName="Goods"
-             *ngFor="let item of AuthForm.get('Goods').controls; let i = index;">
+             *ngFor="let i = index; let item of AuthForm.get('Goods').controls;">
           <div [formGroupName]="i">
 
             <label class="title" for="CodeNC">CodeNC</label>
@@ -60,43 +59,50 @@
               <option value="3">CodeNC3</option>
             </select>
 
-            <label class="title" for="Designation">Designation</label>
-            <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
+            <!-- <label class="title" for="Designation">Designation</label>
+            <input type="text" class="form-control" formControlName="Designation" placeholder="Designation"> -->
 
             <label class="title" for="Quantity">Quantity</label>
-            <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }">
+            <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity"
+             [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Quantity').errors }">
+
+             <!-- AuthForm.get('MainProcessed').controls[i].get('SecondaryProcessed').value; -->
             
-        <div *ngIf="submitted && f.Quantity.errors" class="invalid-feedback">
-          <div *ngIf="f.Quantity.errors.required">Quantity is required</div>
+        <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Quantity').errors" class="invalid-feedback">
+          <div>Quantity is required</div>
         </div>
 
-            <label class="title" for="Unit">Period</label>
-            <select class="form-control" formControlName="Unit" [ngClass]="{ 'is-invalid': submitted && f.Unit.errors }">
+            <label class="title" for="Period">Period</label>
+            <select class="form-control" formControlName="Period" 
+            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Period').errors }">
               <option value="0"></option>
               <option value="1">Days</option>
               <option value="2">Month</option>
               <option value="3">Year</option>
-            </select>            
-            <div *ngIf="submitted && f.Unit.errors" class="invalid-feedback">
-              <div *ngIf="f.Unit.errors.required">Unit is required</div>
+            </select> 
+            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Period').errors" class="invalid-feedback">
+              <div>Period is required</div>
             </div>
 
             <label class="title" for="Number">Number</label>
-            <input type="number" class="form-control" formControlName="Number" placeholder="Number" [ngClass]="{ 'is-invalid': submitted && f.Number.errors }">
-            <div *ngIf="submitted && f.Number.errors" class="invalid-feedback">
-              <div *ngIf="f.Number.errors.required">Number is required</div>
+            <input type="number" class="form-control" formControlName="Number" placeholder="Number" 
+            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Number').errors }">
+            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Number').errors" class="invalid-feedback">
+              <div>Number is required</div>
             </div>
 
             <label class="title" for="UnitOfMeasure">Unit Of Measure</label>
-            <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure" [ngClass]="{ 'is-invalid': submitted && f.UnitOfMeasure.errors }">
-            <div *ngIf="submitted && f.UnitOfMeasure.errors" class="invalid-feedback">
-              <div *ngIf="f.UnitOfMeasure.errors.required">Unit Of Measure is required</div>
+            <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure" 
+            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('UnitOfMeasure').errors }">
+            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('UnitOfMeasure').errors" class="invalid-feedback">
+                <div>UnitOfMeasure is required</div>
             </div>
 
             <label class="title" for="Value">Value</label>
-            <input type="number" class="form-control" formControlName="Value" placeholder="Value" [ngClass]="{ 'is-invalid': submitted && f.Value.errors }">
-            <div *ngIf="submitted && f.Value.errors" class="invalid-feedback">
-              <div *ngIf="f.Value.errors.required">Unit Of Measure is required</div>
+            <input type="number" class="form-control" formControlName="Value" placeholder="Value"
+            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Value').errors }">
+            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Value').errors" class="invalid-feedback">
+                <div>Value is required</div>
             </div>
 
           </div>
@@ -126,7 +132,7 @@
               <label class="title" for="Designation">Designation</label>
               <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
               <label class="title" for="RateofReturn">Rate of Return</label>
-              <input type="text" class="form-control" formControlName="RateofReturn" value="100%" disabled="disabled">
+              <input type="text" class="form-control" formControlName="RateofReturn">
               <label class="title" for="Ratedeterminationmethod">Rate determination method</label>
               <input type="text" class="form-control" formControlName="Ratedeterminationmethod" placeholder="Rate determination method">
               <label class="title" for="ProcessingPlace">Processing Place</label>
@@ -148,7 +154,7 @@
                   <label class="title" for="Designation">Designation</label>
                   <input type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
                   <label class="title" for="RateofReturn">Rate of Return</label>
-                  <input type="text" class="form-control" formControlName="RateofReturnSecondary" value="100%" disabled="disabled">
+                  <input type="text" class="form-control" formControlName="RateofReturnSecondary">
                   <label class="title" for="Ratedeterminationmethod">Rate determination method</label>
                   <input type="text" class="form-control" formControlName="RatedeterminationmethodSecondary"
                          placeholder="Rate determination method">

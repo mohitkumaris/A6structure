@@ -29,6 +29,7 @@ export class CreateauthPageComponent implements OnInit {
   AuthForm: FormGroup;
   CustomsProcedure: CustomProceduresInterface[];
   public submitted = false;
+  public iGood = 0;
 
   constructor(private formBuilder: FormBuilder, private createAuthService: CreateAuthorizationService, private alert: AlertClass) {
   }
@@ -36,10 +37,10 @@ export class CreateauthPageComponent implements OnInit {
   ngOnInit() {
     this.getCustomProcs();
     this.AuthForm = this.formBuilder.group({
-      Authorization: '',
-      GeographicalValidity: [null, Validators.required],
-      StartDate: [null, Validators.required],
-      ExpirationDate: [null, Validators.required],
+      Authorization: [{value: '', disabled: true}],
+      GeographicalValidity: ['', Validators.required],
+      StartDate: ['', Validators.required],
+      ExpirationDate: ['', Validators.required],
       Goods: this.formBuilder.array([this.createGoods()]),
       MainProcessed: this.formBuilder.array([this.createMainProcesed()]),
       OfficesofPlacement: this.formBuilder.array([this.createOfficesofClearance()]),
@@ -60,14 +61,15 @@ export class CreateauthPageComponent implements OnInit {
 
   // Starts: Goods actions
   public addGoods(): void {
+    //this.iGood = item;
     const ctrl = this.AuthForm.get('Goods') as FormArray;
     ctrl.push(this.createGoods());
 
   }
 
-  public removeGoods(): void {
+  public removeGoods(item): void {
     const ctrl = this.AuthForm.get('Goods') as FormArray;
-    ctrl.removeAt(1);
+    ctrl.removeAt(item);
   }
   // Ends: Goods actions
 
@@ -141,12 +143,13 @@ export class CreateauthPageComponent implements OnInit {
   }
 
   // Creation of Elements those are adding dynamically
-  private createGoods(): FormGroup {
+  public createGoods(): FormGroup {
     return this.formBuilder.group({
       CodeNC: '',
       Designation: '',
-      Quantity: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
+      Quantity: [null, Validators.required],
       Unit: [null, Validators.required],
+      Period: [null, Validators.required],
       UnitOfMeasure: [null, Validators.required],
       Number: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
       Value: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
@@ -157,7 +160,7 @@ export class CreateauthPageComponent implements OnInit {
     return this.formBuilder.group({
       CodeNC: '',
       Designation: '',
-      RateofReturn: '100%',
+      RateofReturn: [{value: '100%', disabled: true}, Validators.required],
       Ratedeterminationmethod: '',
       ProcessingPlace: '',
       SecondaryProcessed: this.formBuilder.array([this.createSecondaryProcessed()])
@@ -168,7 +171,7 @@ export class CreateauthPageComponent implements OnInit {
     return this.formBuilder.group({
       CodeNCSecondary: '',
       DesignationSecondary: '',
-      RateofReturnSecondary: '100%',
+      RateofReturnSecondary: [{value: '100%', disabled: true}, Validators.required],
       RatedeterminationmethodSecondary: '',
     });
   }
