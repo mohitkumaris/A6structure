@@ -41,6 +41,8 @@ export class CreateauthPageComponent implements OnInit {
       GeographicalValidity: ['', Validators.required],
       StartDate: ['', Validators.required],
       ExpirationDate: ['', Validators.required],
+      ReferenceAmount: ['', null],
+      CurrencyUsed: ['', null],
       Goods: this.formBuilder.array([this.createGoods()]),
       MainProcessed: this.formBuilder.array([this.createMainProcesed()]),
       OfficesofPlacement: this.formBuilder.array([this.createOfficesofClearance()]),
@@ -61,7 +63,6 @@ export class CreateauthPageComponent implements OnInit {
 
   // Starts: Goods actions
   public addGoods(): void {
-    //this.iGood = item;
     const ctrl = this.AuthForm.get('Goods') as FormArray;
     ctrl.push(this.createGoods());
 

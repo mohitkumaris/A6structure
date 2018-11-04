@@ -160,8 +160,12 @@
                          placeholder="Rate determination method">
                 </div>
                 <div class="action-gp main">
-                  <button class="btn btn-success" type="button" (click)="addMainSecondaryProcessed(i)">Add MainSecondaryProcessed</button>
-                  <button class="btn btn-danger" type="button" (click)="removeMainSecondaryProcessed(i)">Remove MainSecondaryProcessed</button>
+                  <button class="btn btn-success" type="button" (click)="addMainSecondaryProcessed(i)">Add Secondary
+                    Processed Products
+                  </button>
+                  <button class="btn btn-danger" type="button" (click)="removeMainSecondaryProcessed(i)">Remove
+                    Secondary Processed Products
+                  </button>
                 </div>
                 
               </div>
@@ -172,9 +176,10 @@
         </div>
       </div>
       <div class="action-gp">
-        
-      <button class="btn btn-success" type="button" (click)="addMainProcessed()">Add MainProcessed</button>
-      <button class="btn btn-danger" type="button" (click)="removeMainProcessed()">Remove MainProcessed</button>
+
+        <button class="btn btn-success" type="button" (click)="addMainProcessed()">Add Main Processed Products</button>
+        <button class="btn btn-danger" type="button" (click)="removeMainProcessed()">Remove Main Processed Products
+        </button>
       </div>
     </div>
       <!-- Office of Placement -->
@@ -251,6 +256,19 @@
       </div>
       
     </div>
+      <div class="card">
+        <div class="card-header">
+          Guarantee
+        </div>
+        <div class="card-body">
+          <input type="number" formControlName="ReferenceAmount" class="form-control" placeholder="ReferenceAmount">
+          <select class="form-control" formControlName="CurrencyUsed" placeholder="CurrencyUsed">
+            <option value="0"></option>
+            <option value="1">Currency 1</option>
+            <option value="2">Currency 2</option>
+          </select>
+        </div>
+      </div>
       <!-- Ended -->
       <div class="action-gp root">
         <button type="submit" class="btn btn-primary">
