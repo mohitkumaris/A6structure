@@ -1,39 +1,58 @@
-<div class="card reg-card">
+<div class="card cauth-card">
   <div class="card-header">
     Create Authorization
   </div>
   <div class="card-body">
-    <form [formGroup]="AuthForm">
+    <form [formGroup]="AuthForm" (submit)="onSubmit(AuthForm.value)">
       <!--Form Data-->
       <div class="form-group">
-        <label for="Authorization">Authorization#</label>
-        <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#">
+        <label class="title" for="Authorization">Authorization#</label>
+        <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#"
+        disabled="disabled">
 
-        <label>Custom Procedure</label>
+        <label class="title" for="CustomsProcedure">Custom Procedure</label>
         <select class="dropdown" class="form-control">
           <option value="0">Select</option>
           <option *ngFor="let customp of CustomsProcedure" [value]="customp.id">{{customp.name}}</option>
         </select>
+        <!-- <select class="dropdown" class="form-control" formControlName="CustomsProcedure">
+          <option value="0"></option>
+          <option value="51">Perfectionnement actif</option>
+          <option value="31">réexportation</option>
+          <option value="40">mise en libre pratique</option>
+          <option value="71">autre régime</option>
+        </select> -->
 
-        <label for="GeographicalValidity">Geographical Validity</label>
+        <label class="title" for="GeographicalValidity">Geographical Validity</label>
         <input type="text" class="form-control" formControlName="GeographicalValidity"
-               placeholder="Geographical validity">
+               placeholder="Geographical validity" [ngClass]="{ 'is-invalid': submitted && f.GeographicalValidity.errors }"
+               >
+               <div *ngIf="submitted && f.GeographicalValidity.errors" class="invalid-feedback">
+                <div *ngIf="f.GeographicalValidity.errors.required">Geographical validity is required</div>
+              </div>
 
-        <label for="StartDate">Start Date</label>
-        <input type="date" class="form-control" formControlName="StartDate" placeholder="Date of start of validity">
+        <label class="title" for="StartDate">Start Date</label>
+        <input type="date" class="form-control" formControlName="StartDate" placeholder="Date of start of validity" [ngClass]="{ 'is-invalid': submitted && f.StartDate.errors }">
+        <div *ngIf="submitted && f.StartDate.errors" class="invalid-feedback">
+          <div *ngIf="f.StartDate.errors.required">Start Date is required</div>
+        </div>
 
-        <label for="ExpirationDate">Expiration Date</label>
-        <input type="date" class="form-control" formControlName="ExpirationDate" placeholder="Expiration date of validity">
+        <label class="title" for="ExpirationDate">Expiration Date</label>
+        <input type="date" class="form-control" formControlName="ExpirationDate" placeholder="Expiration date of validity" [ngClass]="{ 'is-invalid': submitted && f.ExpirationDate.errors }">
+        <div *ngIf="submitted && f.ExpirationDate.errors" class="invalid-feedback">
+          <div *ngIf="f.ExpirationDate.errors.required">Start Date is required</div>
+        </div>
 
       </div>
       <!--Form Array: Goods-->
+    <div class="card">
       <div class="card-header">Goods to be Placed</div>
       <div class="card-body">
         <div class="form-group" formArrayName="Goods"
              *ngFor="let item of AuthForm.get('Goods').controls; let i = index;">
           <div [formGroupName]="i">
 
-            <label for="CodeNC">CodeNC</label>
+            <label class="title" for="CodeNC">CodeNC</label>
             <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
               <option value="0"></option>
               <option value="1">CodeNC1</option>
@@ -41,87 +60,119 @@
               <option value="3">CodeNC3</option>
             </select>
 
-            <label for="Designation">Designation</label>
+            <label class="title" for="Designation">Designation</label>
             <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
 
-            <label for="Quantity">Quantity</label>
-            <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity">
+            <label class="title" for="Quantity">Quantity</label>
+            <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity" [ngClass]="{ 'is-invalid': submitted && f.Quantity.errors }">
+            
+        <div *ngIf="submitted && f.Quantity.errors" class="invalid-feedback">
+          <div *ngIf="f.Quantity.errors.required">Quantity is required</div>
+        </div>
 
-            <label for="Unit">Period</label>
-            <select class="form-control" formControlName="Unit">
+            <label class="title" for="Unit">Period</label>
+            <select class="form-control" formControlName="Unit" [ngClass]="{ 'is-invalid': submitted && f.Unit.errors }">
               <option value="0"></option>
               <option value="1">Days</option>
               <option value="2">Month</option>
               <option value="3">Year</option>
-            </select>
+            </select>            
+            <div *ngIf="submitted && f.Unit.errors" class="invalid-feedback">
+              <div *ngIf="f.Unit.errors.required">Unit is required</div>
+            </div>
 
-            <label for="Number">Number</label>
-            <input type="number" class="form-control" formControlName="Number" placeholder="Number">
+            <label class="title" for="Number">Number</label>
+            <input type="number" class="form-control" formControlName="Number" placeholder="Number" [ngClass]="{ 'is-invalid': submitted && f.Number.errors }">
+            <div *ngIf="submitted && f.Number.errors" class="invalid-feedback">
+              <div *ngIf="f.Number.errors.required">Number is required</div>
+            </div>
 
-            <label for="UnitOfMeasure">Unit Of Measure</label>
-            <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure">
+            <label class="title" for="UnitOfMeasure">Unit Of Measure</label>
+            <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure" [ngClass]="{ 'is-invalid': submitted && f.UnitOfMeasure.errors }">
+            <div *ngIf="submitted && f.UnitOfMeasure.errors" class="invalid-feedback">
+              <div *ngIf="f.UnitOfMeasure.errors.required">Unit Of Measure is required</div>
+            </div>
 
-            <label for="Value">Value</label>
-            <input type="number" class="form-control" formControlName="Value" placeholder="Value">
+            <label class="title" for="Value">Value</label>
+            <input type="number" class="form-control" formControlName="Value" placeholder="Value" [ngClass]="{ 'is-invalid': submitted && f.Value.errors }">
+            <div *ngIf="submitted && f.Value.errors" class="invalid-feedback">
+              <div *ngIf="f.Value.errors.required">Unit Of Measure is required</div>
+            </div>
 
           </div>
         </div>
-        <button class="btn btn-block" type="button" (click)="addGoods()">Add Goods</button>
-        <button class="btn btn-block" type="button" (click)="removeGoods(i)">Remove Goods</button>
+        <div class="action-gp">
+          <button class="btn btn-success" type="button" (click)="addGoods()">Add Goods</button>
+          <button class="btn btn-danger" type="button" (click)="removeGoods(i)">Remove Goods</button>
+        </div>
+        
       </div>
+    </div>
       <!--Form Array: Main Processed-->
+    <div class="card">
       <div class="card-header">Goods to be Processed</div>
       <div class="card-body">
         <div class="form-group" formArrayName="MainProcessed"
              *ngFor="let item of AuthForm.get('MainProcessed').controls; let i = index;">
           <ng-container [formGroupName]="i">
             <div>
-              <label for="CodeNC">CodeNC</label>
+              <label class="title" for="CodeNC">CodeNC</label>
               <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
                 <option value="0"></option>
                 <option value="1">CodeNC1</option>
                 <option value="2">CodeNC2</option>
                 <option value="3">CodeNC3</option>
               </select>
-              <label for="Designation">Designation</label>
+              <label class="title" for="Designation">Designation</label>
               <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
-              <label for="RateofReturn">Rate of Return</label>
-              <input type="text" class="form-control" formControlName="RateofReturn" placeholder="Rate of Return">
-              <label for="Ratedeterminationmethod">Rate determination method</label>
+              <label class="title" for="RateofReturn">Rate of Return</label>
+              <input type="text" class="form-control" formControlName="RateofReturn" value="100%" disabled="disabled">
+              <label class="title" for="Ratedeterminationmethod">Rate determination method</label>
               <input type="text" class="form-control" formControlName="Ratedeterminationmethod" placeholder="Rate determination method">
-              <label for="ProcessingPlace">Processing Place</label>
+              <label class="title" for="ProcessingPlace">Processing Place</label>
               <input type="text" class="form-control" formControlName="ProcessingPlace" placeholder="Processing Place">
             </div>
+          <div class="card">
             <div class="card-header">Secondary Products to be Processed</div>
             <div class="card-body">
               <div class="form-group" formArrayName="SecondaryProcessed"
                    *ngFor="let secondaryProccessedItem of AuthForm.get('MainProcessed').controls[i].get('SecondaryProcessed').value; let j = index;">
                 <div [formGroupName]="j">
-                  <label for="CodeNC">CodeNC</label>
+                  <label class="title" for="CodeNC">CodeNC</label>
                   <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
                     <option value="0"></option>
                     <option value="1">CodeNC1</option>
                     <option value="2">CodeNC2</option>
                     <option value="3">CodeNC3</option>
                   </select>
-                  <label for="Designation">Designation</label>
+                  <label class="title" for="Designation">Designation</label>
                   <input type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
-                  <label for="RateofReturn">Rate of Return</label>
-                  <input type="text" class="form-control" formControlName="RateofReturnSecondary" placeholder="Rate of Return">
-                  <label for="Ratedeterminationmethod">Rate determination method</label>
+                  <label class="title" for="RateofReturn">Rate of Return</label>
+                  <input type="text" class="form-control" formControlName="RateofReturnSecondary" value="100%" disabled="disabled">
+                  <label class="title" for="Ratedeterminationmethod">Rate determination method</label>
                   <input type="text" class="form-control" formControlName="RatedeterminationmethodSecondary"
                          placeholder="Rate determination method">
                 </div>
-                <button class="btn btn-block" type="button" (click)="addMainSecondaryProcessed(i)">Add MainSecondaryProcessed</button>
-                <button class="btn btn-block" type="button" (click)="removeMainSecondaryProcessed(i)">Remove MainSecondaryProcessed</button>
+                <div class="action-gp main">
+                  <button class="btn btn-success" type="button" (click)="addMainSecondaryProcessed(i)">Add MainSecondaryProcessed</button>
+                  <button class="btn btn-danger" type="button" (click)="removeMainSecondaryProcessed(i)">Remove MainSecondaryProcessed</button>
+                </div>
+                
               </div>
             </div>
+          </div>
+
           </ng-container>
         </div>
       </div>
-      <button class="btn btn-block" type="button" (click)="addMainProcessed()">Add MainProcessed</button>
-      <button class="btn btn-block" type="button" (click)="removeMainProcessed()">Remove MainProcessed</button>
+      <div class="action-gp">
+        
+      <button class="btn btn-success" type="button" (click)="addMainProcessed()">Add MainProcessed</button>
+      <button class="btn btn-danger" type="button" (click)="removeMainProcessed()">Remove MainProcessed</button>
+      </div>
+    </div>
       <!-- Office of Placement -->
+    <div class="card">
       <div class="card-header">
         Offices of Placement
       </div>
@@ -129,7 +180,7 @@
         <div class="form-group" formArrayName="OfficesofPlacement"
              *ngFor="let item of AuthForm.get('OfficesofPlacement').controls; let i = index;">
           <div [formGroupName]="i">
-            <label for="OfficesPlacement">Offices of Placement</label>
+            <label class="title" for="OfficesPlacement">Offices of Placement</label>
             <select class="form-control" formControlName="OfficesPlacement" placeholder="OfficesPlacement">
               <option value="0"></option>
               <option value="1">Code Office</option>
@@ -138,10 +189,15 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-block" type="button" (click)="addOfficesofPlacement()">Add Placement</button>
-      <button class="btn btn-block" type="button" (click)="removeOfficesofPlacement(i)">Remove Placement</button>
+      <div class="action-gp">
+        <button class="btn btn-success" type="button" (click)="addOfficesofPlacement()">Add Placement</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofPlacement(i)">Remove Placement</button>
+      </div>
+      
+    </div>
       <!-- Ended -->
       <!-- Office of Clearance -->
+    <div class="card">
       <div class="card-header">
         Offices of Clearance
       </div>
@@ -149,7 +205,7 @@
         <div class="form-group" formArrayName="OfficesofClearance"
              *ngFor="let item of AuthForm.get('OfficesofClearance').controls; let i = index;">
           <div [formGroupName]="i">
-            <label for="OfficesClearance">Offices of Clearance</label>
+            <label class="title" for="OfficesClearance">Offices of Clearance</label>
             <select class="form-control" formControlName="OfficesClearance" placeholder="OfficesClearance">
               <option value="0"></option>
               <option value="1">Code Office</option>
@@ -158,10 +214,15 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-block" type="button" (click)="addOfficesofClearance()">Add Clearance</button>
-      <button class="btn btn-block" type="button" (click)="removeOfficesofClearance(i)">Remove Clearance</button>
+      <div class="action-gp">
+        <button class="btn btn-success" type="button" (click)="addOfficesofClearance()">Add Clearance</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofClearance(i)">Remove Clearance</button>
+      </div>
+      
+    </div>
       <!-- Ended -->
       <!-- Office of Clearance -->
+    <div class="card">
       <div class="card-header">
         Offices of Control
       </div>
@@ -169,7 +230,7 @@
         <div class="form-group" formArrayName="OfficesofControl"
              *ngFor="let item of AuthForm.get('OfficesofControl').controls; let i = index;">
           <div [formGroupName]="i">
-            <label for="OfficesofControl">Offices of Control</label>
+            <label class="title" for="OfficesofControl">Offices of Control</label>
             <select class="form-control" formControlName="OfficesControl" placeholder="OfficesControl">
               <option value="0"></option>
               <option value="1">Code Office</option>
@@ -178,13 +239,17 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-block" type="button" (click)="addOfficesofControl()">Add Control</button>
-      <button class="btn btn-block" type="button" (click)="removeOfficesofControl(i)">Remove Control</button>
+      <div class="action-gp">
+        <button class="btn btn-success" type="button" (click)="addOfficesofControl()">Add Control</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofControl(i)">Remove Control</button>
+      </div>
+      
+    </div>
       <!-- Ended -->
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary" [disabled]="AuthForm.invalid" (click)="save(AuthForm.value)">
+      <div class="action-gp root">
+        <button type="submit" class="btn btn-primary">
           Create Authorization
-        </button>
+        </button><!--[disabled]="AuthForm.invalid" (click)="save(AuthForm.value)"-->
       </div>
     </form>
   </div>

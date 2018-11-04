@@ -28,6 +28,7 @@ export class CreateauthPageComponent implements OnInit {
 
   AuthForm: FormGroup;
   CustomsProcedure: CustomProceduresInterface[];
+  public submitted = false;
 
   constructor(private formBuilder: FormBuilder, private createAuthService: CreateAuthorizationService, private alert: AlertClass) {
   }
@@ -36,9 +37,9 @@ export class CreateauthPageComponent implements OnInit {
     this.getCustomProcs();
     this.AuthForm = this.formBuilder.group({
       Authorization: '',
-      GeographicalValidity: '',
-      StartDate: '',
-      ExpirationDate: '',
+      GeographicalValidity: [null, Validators.required],
+      StartDate: [null, Validators.required],
+      ExpirationDate: [null, Validators.required],
       Goods: this.formBuilder.array([this.createGoods()]),
       MainProcessed: this.formBuilder.array([this.createMainProcesed()]),
       OfficesofPlacement: this.formBuilder.array([this.createOfficesofClearance()]),
@@ -133,7 +134,8 @@ export class CreateauthPageComponent implements OnInit {
 
   // End office of Control
 
-  public save(formValue) {
+  public onSubmit(formValue) {
+    this.submitted = true;
     if (this.AuthForm.invalid) { return; }
     console.log(this.AuthForm.value);
   }
@@ -143,11 +145,11 @@ export class CreateauthPageComponent implements OnInit {
     return this.formBuilder.group({
       CodeNC: '',
       Designation: '',
-      Quantity: '',
-      Unit: '',
-      UnitOfMeasure: '',
-      Number: '',
-      Value: ''
+      Quantity: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
+      Unit: [null, Validators.required],
+      UnitOfMeasure: [null, Validators.required],
+      Number: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
+      Value: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
     });
   }
 
