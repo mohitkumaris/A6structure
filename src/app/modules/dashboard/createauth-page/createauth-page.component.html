@@ -37,9 +37,11 @@
         </div>
 
         <label class="title" for="ExpirationDate">Expiration Date</label>
-        <input type="date" class="form-control" formControlName="ExpirationDate" placeholder="Expiration date of validity" [ngClass]="{ 'is-invalid': submitted && f.ExpirationDate.errors }">
+        <input type="date" class="form-control" formControlName="ExpirationDate"
+               (change)="checkDate($event.target.value)" placeholder="Expiration date of validity"
+               [ngClass]="{ 'is-invalid': submitted && f.ExpirationDate.errors }">
         <div *ngIf="submitted && f.ExpirationDate.errors" class="invalid-feedback">
-          <div *ngIf="f.ExpirationDate.errors.required">Start Date is required</div>
+          <div *ngIf="f.ExpirationDate.errors.required">Expiration Date is required</div>
         </div>
 
       </div>
@@ -48,7 +50,7 @@
       <div class="card-header">Goods to be Placed</div>
       <div class="card-body">
         <div class="form-group" formArrayName="Goods"
-             *ngFor="let i = index; let item of AuthForm.get('Goods').controls;">
+             *ngFor="let item of AuthForm.get('Goods').controls;let i = index; ">
           <div [formGroupName]="i">
 
             <label class="title" for="CodeNC">CodeNC</label>

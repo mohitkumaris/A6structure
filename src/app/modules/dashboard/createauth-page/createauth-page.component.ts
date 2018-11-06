@@ -13,7 +13,7 @@
  ** Processing Place : drop-down populated with Processing Places owned by Operator
  *************************************************************************************/
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, Form } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormArray, Form, FormControl} from '@angular/forms';
 import {CreateAuthorizationService} from '../../../shared/services/createauthorization/createAuthorization.service';
 import {CustomProceduresInterface} from '../../../shared/interfaces/createAuthorization/customProcedures-interface';
 import {AlertClass} from '../../../shared/services/common/alert';
@@ -59,6 +59,14 @@ export class CreateauthPageComponent implements OnInit {
         this.alert.openModal(error, 'Error');
       });
   }
+
+  // Validate Stsrt and End Date
+  public checkDate(value) {
+    const startDate = this.AuthForm.get('StartDate') as FormControl;
+    console.log(value);
+  }
+
+  // End
 
 
   // Starts: Goods actions
