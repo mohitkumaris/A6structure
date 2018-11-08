@@ -44,6 +44,12 @@ export class CreateauthPageComponent implements OnInit {
       ReferenceAmount: ['', null],
       CurrencyUsed: ['', null],
       Goods: this.formBuilder.array([this.createGoods()]),
+      Quantity: [null, Validators.required],
+      Unit: [null, Validators.required],
+      Period: [null, Validators.required],
+      UnitOfMeasure: [null, Validators.required],
+      Number: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
+      Value: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
       MainProcessed: this.formBuilder.array([this.createMainProcesed()]),
       OfficesofPlacement: this.formBuilder.array([this.createOfficesofClearance()]),
       OfficesofClearance: this.formBuilder.array([this.createOfficesofClearance()]),
@@ -155,13 +161,8 @@ export class CreateauthPageComponent implements OnInit {
   public createGoods(): FormGroup {
     return this.formBuilder.group({
       CodeNC: '',
-      Designation: '',
-      Quantity: [null, Validators.required],
-      Unit: [null, Validators.required],
-      Period: [null, Validators.required],
-      UnitOfMeasure: [null, Validators.required],
-      Number: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)],
-      Value: [null, Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+      Designation: ''
+
     });
   }
 

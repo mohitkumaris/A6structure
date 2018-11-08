@@ -61,61 +61,61 @@
               <option value="3">CodeNC3</option>
             </select>
 
-            <!-- <label class="title" for="Designation">Designation</label>
-            <input type="text" class="form-control" formControlName="Designation" placeholder="Designation"> -->
-
-            <label class="title" for="Quantity">Quantity</label>
-            <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity"
-             [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Quantity').errors }">
-
-             <!-- AuthForm.get('MainProcessed').controls[i].get('SecondaryProcessed').value; -->
-            
-        <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Quantity').errors" class="invalid-feedback">
-          <div>Quantity is required</div>
-        </div>
-
-            <label class="title" for="Period">Period</label>
-            <select class="form-control" formControlName="Period" 
-            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Period').errors }">
-              <option value="0"></option>
-              <option value="1">Days</option>
-              <option value="2">Month</option>
-              <option value="3">Year</option>
-            </select> 
-            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Period').errors" class="invalid-feedback">
-              <div>Period is required</div>
-            </div>
-
-            <label class="title" for="Number">Number</label>
-            <input type="number" class="form-control" formControlName="Number" placeholder="Number" 
-            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Number').errors }">
-            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Number').errors" class="invalid-feedback">
-              <div>Number is required</div>
-            </div>
-
-            <label class="title" for="UnitOfMeasure">Unit Of Measure</label>
-            <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure" 
-            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('UnitOfMeasure').errors }">
-            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('UnitOfMeasure').errors" class="invalid-feedback">
-                <div>UnitOfMeasure is required</div>
-            </div>
-
-            <label class="title" for="Value">Value</label>
-            <input type="number" class="form-control" formControlName="Value" placeholder="Value"
-            [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Goods').controls[i].get('Value').errors }">
-            <div *ngIf="submitted && AuthForm.get('Goods').controls[i].get('Value').errors" class="invalid-feedback">
-                <div>Value is required</div>
-            </div>
 
           </div>
+
         </div>
         <div class="action-gp">
           <button class="btn btn-success" type="button" (click)="addGoods()">Add Goods</button>
           <button class="btn btn-danger" type="button" (click)="removeGoods(i)">Remove Goods</button>
         </div>
-        
+
       </div>
     </div>
+      <div class="card">
+        <div class="card-header">Goods to be Placed: Limits to be observed</div>
+        <div class="card-body">
+          <label class="title" for="Quantity">Quantity</label>
+          <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Quantity').errors }">
+          <div *ngIf="submitted && AuthForm.get('Quantity').errors" class="invalid-feedback">
+            <div>Quantity is required</div>
+          </div>
+
+          <label class="title" for="Period">Period</label>
+          <select class="form-control" formControlName="Period"
+                  [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Period').errors }">
+            <option value="0"></option>
+            <option value="1">Days</option>
+            <option value="2">Month</option>
+            <option value="3">Year</option>
+          </select>
+          <div *ngIf="submitted && AuthForm.get('Period').errors" class="invalid-feedback">
+            <div>Period is required</div>
+          </div>
+
+          <label class="title" for="Number">Number</label>
+          <input type="number" class="form-control" formControlName="Number" placeholder="Number"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Number').errors }">
+          <div *ngIf="submitted && AuthForm.get('Number').errors" class="invalid-feedback">
+            <div>Number is required</div>
+          </div>
+
+          <label class="title" for="UnitOfMeasure">Unit Of Measure</label>
+          <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('UnitOfMeasure').errors }">
+          <div *ngIf="submitted && AuthForm.get('UnitOfMeasure').errors" class="invalid-feedback">
+            <div>UnitOfMeasure is required</div>
+          </div>
+
+          <label class="title" for="Value">Value</label>
+          <input type="number" class="form-control" formControlName="Value" placeholder="Value"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Value').errors }">
+          <div *ngIf="submitted && AuthForm.get('Value').errors" class="invalid-feedback">
+            <div>Value is required</div>
+          </div>
+        </div>
+      </div>
       <!--Form Array: Main Processed-->
     <div class="card">
       <div class="card-header">Goods to be Processed</div>
