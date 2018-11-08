@@ -17,6 +17,7 @@ import {FormBuilder, FormGroup, Validators, FormArray, Form, FormControl} from '
 import {CreateAuthorizationService} from '../../../shared/services/createauthorization/createAuthorization.service';
 import {CustomProceduresInterface} from '../../../shared/interfaces/createAuthorization/customProcedures-interface';
 import {AlertClass} from '../../../shared/services/common/alert';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-createauth-page',
@@ -155,6 +156,18 @@ export class CreateauthPageComponent implements OnInit {
     this.submitted = true;
     if (this.AuthForm.invalid) { return; }
     console.log(this.AuthForm.value);
+    this.submitted = true;
+    if (this.AuthForm.invalid) {
+      return;
+    }
+    const userModel = {
+      email: null,
+      first_name: null,
+      last_name: null
+    };
+    const user = localStorage.getItem('currentUser');
+    const userData = _.pick(JSON.parse(user), _.keys(userModel));
+    const authorizationData = _.assign({}, userData, formValue);
   }
 
   // Creation of Elements those are adding dynamically
