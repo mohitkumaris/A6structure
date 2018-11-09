@@ -13,10 +13,10 @@
  ** Processing Place : drop-down populated with Processing Places owned by Operator
  *************************************************************************************/
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormArray, Form, FormControl} from '@angular/forms';
-import {CreateAuthorizationService} from '../../../shared/services/createauthorization/createAuthorization.service';
-import {CustomProceduresInterface} from '../../../shared/interfaces/createAuthorization/customProcedures-interface';
-import {AlertClass} from '../../../shared/services/common/alert';
+import { FormBuilder, FormGroup, Validators, FormArray, Form, FormControl } from '@angular/forms';
+import { CreateAuthorizationService } from '../../../shared/services/createauthorization/createAuthorization.service';
+import { CustomProceduresInterface } from '../../../shared/interfaces/createAuthorization/customProcedures-interface';
+import { AlertClass } from '../../../shared/services/common/alert';
 import * as _ from 'lodash';
 
 @Component({
@@ -38,7 +38,7 @@ export class CreateauthPageComponent implements OnInit {
   ngOnInit() {
     this.getCustomProcs();
     this.AuthForm = this.formBuilder.group({
-      Authorization: [{value: '', disabled: true}],
+      Authorization: [{ value: '', disabled: true }],
       GeographicalValidity: ['', Validators.required],
       StartDate: ['', Validators.required],
       ExpirationDate: ['', Validators.required],
@@ -85,7 +85,8 @@ export class CreateauthPageComponent implements OnInit {
 
   public removeGoods(item): void {
     const ctrl = this.AuthForm.get('Goods') as FormArray;
-    ctrl.removeAt(item);
+    //ctrl.removeAt(item);
+    ctrl.removeAt(ctrl.value.indexOf(item));
   }
   // Ends: Goods actions
 
@@ -183,7 +184,7 @@ export class CreateauthPageComponent implements OnInit {
     return this.formBuilder.group({
       CodeNC: '',
       Designation: '',
-      RateofReturn: [{value: '100%', disabled: true}, Validators.required],
+      RateofReturn: [{ value: '100%', disabled: true }, Validators.required],
       Ratedeterminationmethod: '',
       ProcessingPlace: '',
       SecondaryProcessed: this.formBuilder.array([this.createSecondaryProcessed()])
@@ -194,7 +195,7 @@ export class CreateauthPageComponent implements OnInit {
     return this.formBuilder.group({
       CodeNCSecondary: '',
       DesignationSecondary: '',
-      RateofReturnSecondary: [{value: '100%', disabled: true}, Validators.required],
+      RateofReturnSecondary: [{ value: '100%', disabled: true }, Validators.required],
       RatedeterminationmethodSecondary: '',
     });
   }
@@ -217,7 +218,7 @@ export class CreateauthPageComponent implements OnInit {
     });
   }
 
-// Ends Creation
+  // Ends Creation
   // convenience getter for easy access to form fields
   get f() {
     return this.AuthForm.controls;
