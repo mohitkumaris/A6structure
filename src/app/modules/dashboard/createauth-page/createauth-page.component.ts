@@ -85,7 +85,7 @@ export class CreateauthPageComponent implements OnInit {
 
   public removeGoods(item): void {
     const ctrl = this.AuthForm.get('Goods') as FormArray;
-    //ctrl.removeAt(item);
+    // ctrl.removeAt(item);
     ctrl.removeAt(ctrl.value.indexOf(item));
   }
   // Ends: Goods actions
@@ -100,7 +100,7 @@ export class CreateauthPageComponent implements OnInit {
   public removeMainSecondaryProcessed(mainProcessIdx: number): void {
     const mainProcessedCtrl = this.AuthForm.get('MainProcessed') as FormArray;
     const secondaryProcessedCtrl = mainProcessedCtrl.controls[0].get('SecondaryProcessed') as FormArray;
-    secondaryProcessedCtrl.removeAt(mainProcessIdx);
+    secondaryProcessedCtrl.removeAt(secondaryProcessedCtrl.value.indexOf(mainProcessIdx));
   }
 
   public addMainProcessed(): void {
@@ -108,9 +108,9 @@ export class CreateauthPageComponent implements OnInit {
     ctrl.push(this.createMainProcesed());
   }
 
-  public removeMainProcessed(): void {
+  public removeMainProcessed(i): void {
     const ctrl = this.AuthForm.get('MainProcessed') as FormArray;
-    ctrl.removeAt(1);
+    ctrl.removeAt(ctrl.value.indexOf(i));
   }
   // Ends: Main Processed actions
 
@@ -122,7 +122,7 @@ export class CreateauthPageComponent implements OnInit {
 
   public removeOfficesofPlacement(i): void {
     const ctrl = this.AuthForm.get('OfficesofPlacement') as FormArray;
-    ctrl.removeAt(i);
+    ctrl.removeAt(ctrl.value.indexOf(i));
   }
 
   // End office of Placement
@@ -135,7 +135,7 @@ export class CreateauthPageComponent implements OnInit {
 
   public removeOfficesofClearance(i): void {
     const ctrl = this.AuthForm.get('OfficesofClearance') as FormArray;
-    ctrl.removeAt(i);
+    ctrl.removeAt(ctrl.value.indexOf(i));
   }
 
   // End office of Clearance
@@ -148,7 +148,7 @@ export class CreateauthPageComponent implements OnInit {
 
   public removeOfficesofControl(i): void {
     const ctrl = this.AuthForm.get('OfficesofControl') as FormArray;
-    ctrl.removeAt(i);
+    ctrl.removeAt(ctrl.value.indexOf(i));
   }
 
   // End office of Control
