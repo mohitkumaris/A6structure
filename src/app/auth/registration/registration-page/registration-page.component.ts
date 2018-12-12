@@ -4,6 +4,7 @@ import {UserInterface} from '../../../shared/interfaces/user/user-interface';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../shared/services/auth/auth.service';
 import {AlertClass} from '../../../shared/services/common/alert';
+import {SessionService} from '../../../shared/services/pipeService/sessionService';
 
 
 
@@ -19,9 +20,13 @@ export class RegistrationPageComponent implements OnInit {
   loading = false;
   submitted = false;
   show = false;
+  today = new Date();
+  val = 123.45;
+  name = 'mohit kumar';
 
   constructor(
-    private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private alert: AlertClass) {
+    private formBuilder: FormBuilder, private authService: AuthService,
+    private router: Router, private alert: AlertClass, private sessionService: SessionService) {
   }
 
   ngOnInit() {
@@ -38,6 +43,23 @@ export class RegistrationPageComponent implements OnInit {
   showOrganization(event: any) {
     this.show = true ? event.target.value === 'Operator' : false;
   }
+
+  // Date pipes
+  norway() {
+    this.sessionService.registerCulture('nb-NO');
+    this.refreshValues();
+  }
+
+  sweden() {
+    this.sessionService.registerCulture('sv-SE');
+    this.refreshValues();
+  }
+
+  private refreshValues() {
+    this.today = new Date();
+    this.val++;
+  }
+
 
   onSubmit(formValue) {
     this.submitted = true;

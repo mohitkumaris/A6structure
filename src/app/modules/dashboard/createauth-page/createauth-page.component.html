@@ -10,17 +10,13 @@
         <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#">
 
         <label class="title" for="CustomsProcedure">Custom Procedure</label>
-        <select class="dropdown" class="form-control">
-          <option value="0">Select</option>
-          <option *ngFor="let customp of CustomsProcedure" [value]="customp.id">{{customp.name}}</option>
-        </select>
-        <!-- <select class="dropdown" class="form-control" formControlName="CustomsProcedure">
+        <select class="dropdown" class="form-control" formControlName="CustomsProcedure">
           <option value="0"></option>
           <option value="51">Perfectionnement actif</option>
           <option value="31">réexportation</option>
           <option value="40">mise en libre pratique</option>
           <option value="71">autre régime</option>
-        </select> -->
+        </select>
 
         <label class="title" for="GeographicalValidity">Geographical Validity</label>
         <input type="text" class="form-control" formControlName="GeographicalValidity"
