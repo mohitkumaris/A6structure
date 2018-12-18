@@ -17,13 +17,13 @@ import {SessionService} from '../../../shared/services/pipeService/sessionServic
 })
 export class RegistrationPageComponent implements OnInit {
   registerForm: FormGroup;
-  loading = false;
+  loading: any;
   submitted = false;
   show = false;
   today = new Date();
   val = 123.45;
   name = 'mohit kumar';
-
+  posts: any;
   constructor(
     private formBuilder: FormBuilder, private authService: AuthService,
     private router: Router, private alert: AlertClass, private sessionService: SessionService) {
@@ -35,6 +35,12 @@ export class RegistrationPageComponent implements OnInit {
       password: [null, Validators.required],
       fName: [null, Validators.required],
       lName: [null, Validators.required]
+    });
+    this.authService.getUser().subscribe((response) => {
+      this.posts = response;
+      this.loading = false;
+    }, (error) => {
+      this.loading = false;
     });
   }
 
@@ -69,10 +75,6 @@ export class RegistrationPageComponent implements OnInit {
       return;
     }
 
-
-    this.authService.getUser().subscribe((response) => {
-       console.log(response);
-    });
 
     // this.loading = true;
 

@@ -7,7 +7,10 @@ import {AppConfig} from '../../app-config';
 
 
 const appConfig = new AppConfig();
-@Injectable()
+
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private apiTypes: any;
   constructor(private restService: RestService) {
@@ -17,7 +20,7 @@ export class AuthService {
     return this.restService.postService(appConfig.resgisterUrl, data, this.apiTypes.app);
   }
 
-  getUser() : Observable<any> {
-    return this.restService.getService("https://restcountries.eu/rest/v2/name/eesti");
+  getUser(): Observable<any> {
+    return this.restService.getService('https://jsonplaceholder.typicode.com/posts');
   }
 }

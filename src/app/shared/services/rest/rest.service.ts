@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-
-
 import { AppConfig} from '../../app-config';
 import { Observable} from 'rxjs/Observable';
-import { map, catchError, finalize } from 'rxjs/operators';
+import {map, catchError, finalize, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import {LoaderService} from '../loader/loader';
 
 const appConfig = new AppConfig();
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RestService {
   private headers: HttpHeaders;
   public apiTypes = {
@@ -19,11 +19,9 @@ export class RestService {
   };
 
 
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private loaderService: LoaderService) {
    // this.pushHeaders();
   }
-
   public pushHeaders() {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json',
       'Accept': 'q=0.8;application/json;q=0.9',
@@ -34,15 +32,17 @@ export class RestService {
 
   // Get Call
   public getService(url: string, isAuth?: string): Observable<any> {
-    const _url = appConfig.appUrl + url;
+    // const _url = appConfig.appUrl + url;
     // show loader
+    this.loaderService.show();
     return this.http
-      .get(_url)
+      .get(url)
       .pipe(
       map(this.fromResponse),
       catchError(this.catchServerError),
       finalize(() => {
         // hide loader
+        this.loaderService.hide();
       })
     );
   }
