@@ -41,6 +41,21 @@
         <p>Name:{{name | capitalize}}</p>
         <button (click)="norway()">Norway</button>
         <button (click)="sweden()">Sweden</button>
+        <p>Multi Option</p>
+        <app-dato-select>
+          <app-dato-option ddwn multi *ngFor="let option of options">
+            {{option}}
+          </app-dato-option>
+        </app-dato-select>
+
+        <p>No Multiple Option</p>
+        <app-dato-select>
+          <app-dato-option ddwn *ngFor="let option of options">{{option}}</app-dato-option>
+        </app-dato-select>
+        <p> Normal dropdown</p>
+        <select>
+          <option *ngFor="let option of options">{{option}}</option>
+        </select>
 
       </div>
       <div class="form-group">

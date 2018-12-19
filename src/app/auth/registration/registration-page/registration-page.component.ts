@@ -24,6 +24,7 @@ export class RegistrationPageComponent implements OnInit {
   val = 123.45;
   name = 'mohit kumar';
   posts: any;
+  options = ['option1', 'option2', 'option3'];
   constructor(
     private formBuilder: FormBuilder, private authService: AuthService,
     private router: Router, private alert: AlertClass, private sessionService: SessionService) {
@@ -42,6 +43,10 @@ export class RegistrationPageComponent implements OnInit {
     }, (error) => {
       this.loading = false;
     });
+  }
+
+  Change(count) {
+    console.log(count);
   }
 
   // convenience getter for easy access to form fields

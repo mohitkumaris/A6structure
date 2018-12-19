@@ -14,7 +14,8 @@ import {LoaderComponentComponent} from './shared/components/loader-component/loa
     PageNotFoundComponent,
     AlertComponent,
     LoaderComponentComponent
-    ],
+
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
