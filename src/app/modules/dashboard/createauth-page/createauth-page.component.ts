@@ -83,8 +83,9 @@ export class CreateauthPageComponent implements OnInit {
 
   }
 
-  public removeGoods(item): void {
-    const ctrl = this.AuthForm.get('Goods') as FormArray;
+  public removeGoods(): void {
+    const ctrl = <FormArray>this.AuthForm.get('Goods');
+    let item;
     // ctrl.removeAt(item);
     ctrl.removeAt(ctrl.value.indexOf(item));
   }
@@ -92,63 +93,67 @@ export class CreateauthPageComponent implements OnInit {
 
   // Starts: Main Processed actions
   public addMainSecondaryProcessed(mainProcessIdx: number): void {
-    const mainProcessedCtrl = this.AuthForm.get('MainProcessed') as FormArray;
-    const secondaryProcessedCtrl = mainProcessedCtrl.controls[0].get('SecondaryProcessed') as FormArray;
+    const mainProcessedCtrl = <FormArray>this.AuthForm.get('MainProcessed');
+    const secondaryProcessedCtrl = <FormArray>mainProcessedCtrl.controls[0].get('SecondaryProcessed');
     secondaryProcessedCtrl.push(this.createSecondaryProcessed());
   }
 
   public removeMainSecondaryProcessed(mainProcessIdx: number): void {
-    const mainProcessedCtrl = this.AuthForm.get('MainProcessed') as FormArray;
-    const secondaryProcessedCtrl = mainProcessedCtrl.controls[0].get('SecondaryProcessed') as FormArray;
+    const mainProcessedCtrl = <FormArray>this.AuthForm.get('MainProcessed');
+    const secondaryProcessedCtrl = <FormArray>mainProcessedCtrl.controls[0].get('SecondaryProcessed');
     secondaryProcessedCtrl.removeAt(secondaryProcessedCtrl.value.indexOf(mainProcessIdx));
   }
 
   public addMainProcessed(): void {
-    const ctrl = this.AuthForm.get('MainProcessed') as FormArray;
+    const ctrl = <FormArray>this.AuthForm.get('MainProcessed');
     ctrl.push(this.createMainProcesed());
   }
 
-  public removeMainProcessed(i): void {
-    const ctrl = this.AuthForm.get('MainProcessed') as FormArray;
-    ctrl.removeAt(ctrl.value.indexOf(i));
+  public removeMainProcessed(): void {
+    const ctrl = <FormArray>this.AuthForm.get('MainProcessed');
+    let item;
+    ctrl.removeAt(ctrl.value.indexOf(item));
   }
   // Ends: Main Processed actions
 
   // Add office of Placement
   public addOfficesofPlacement(): void {
-    const ctrl = this.AuthForm.get('OfficesofPlacement') as FormArray;
+    const ctrl = <FormArray>this.AuthForm.get('OfficesofPlacement');
     ctrl.push(this.createOfficesofPlacement());
   }
 
-  public removeOfficesofPlacement(i): void {
-    const ctrl = this.AuthForm.get('OfficesofPlacement') as FormArray;
-    ctrl.removeAt(ctrl.value.indexOf(i));
+  public removeOfficesofPlacement(): void {
+    const ctrl = <FormArray>this.AuthForm.get('OfficesofPlacement');
+    let item;
+    ctrl.removeAt(ctrl.value.indexOf());
   }
 
   // End office of Placement
 
   // Add office of Clearance
   public addOfficesofClearance(): void {
-    const ctrl = this.AuthForm.get('OfficesofClearance') as FormArray;
+    const ctrl = <FormArray>this.AuthForm.get('OfficesofClearance');
     ctrl.push(this.createOfficesofClearance());
   }
 
-  public removeOfficesofClearance(i): void {
-    const ctrl = this.AuthForm.get('OfficesofClearance') as FormArray;
-    ctrl.removeAt(ctrl.value.indexOf(i));
+  public removeOfficesofClearance(): void {
+    const ctrl = <FormArray>this.AuthForm.get('OfficesofClearance');
+    let item;
+    ctrl.removeAt(ctrl.value.indexOf(item));
   }
 
   // End office of Clearance
 
   // Add Offices of Control
   public addOfficesofControl(): void {
-    const ctrl = this.AuthForm.get('OfficesofControl') as FormArray;
+    const ctrl = <FormArray>this.AuthForm.get('OfficesofControl');
     ctrl.push(this.createOfficesofControl());
   }
 
-  public removeOfficesofControl(i): void {
-    const ctrl = this.AuthForm.get('OfficesofControl') as FormArray;
-    ctrl.removeAt(ctrl.value.indexOf(i));
+  public removeOfficesofControl(): void {
+    const ctrl = <FormArray>this.AuthForm.get('OfficesofControl');
+    let item;
+    ctrl.removeAt(ctrl.value.indexOf(item));
   }
 
   // End office of Control

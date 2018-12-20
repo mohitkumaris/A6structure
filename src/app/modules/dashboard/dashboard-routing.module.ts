@@ -26,6 +26,14 @@ const routes: Routes = [
         data: {
           title: 'Sample'
         }
+      },
+      {
+        path: 'inputoutput',
+        component: DashboardLayoutComponent,
+        loadChildren: './input-output/input-output.module#InputOutputModule',
+        data: {
+          title: 'Sample'
+        }
       }
     ]
   }

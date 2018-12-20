@@ -46,7 +46,7 @@
       <div class="card-header">Goods to be Placed</div>
       <div class="card-body">
         <div class="form-group" formArrayName="Goods"
-             *ngFor="let item of AuthForm.get('Goods').controls;let i = index; ">
+             *ngFor="let item of AuthForm.get('Goods').value;let i = index; ">
           <div [formGroupName]="i">
 
             <label class="title" for="CodeNC">CodeNC</label>
@@ -63,7 +63,7 @@
         </div>
         <div class="action-gp">
           <button class="btn btn-success" type="button" (click)="addGoods()">Add Goods</button>
-          <button class="btn btn-danger" type="button" (click)="removeGoods(i)">Remove Goods</button>
+          <button class="btn btn-danger" type="button" (click)="removeGoods()">Remove Goods</button>
         </div>
 
       </div>
@@ -117,7 +117,7 @@
       <div class="card-header">Goods to be Processed</div>
       <div class="card-body">
         <div class="form-group" formArrayName="MainProcessed"
-             *ngFor="let item of AuthForm.get('MainProcessed').controls; let i = index;">
+             *ngFor="let item of AuthForm.get('MainProcessed').value; let i = index;">
           <ng-container [formGroupName]="i">
             <div>
               <label class="title" for="CodeNC">CodeNC</label>
@@ -140,7 +140,7 @@
             <div class="card-header">Secondary Products to be Processed</div>
             <div class="card-body">
               <div class="form-group" formArrayName="SecondaryProcessed"
-                   *ngFor="let secondaryProccessedItem of AuthForm.get('MainProcessed').controls[i].get('SecondaryProcessed').value; let j = index;">
+                   *ngFor="let secondaryProccessedItem of AuthForm.get('MainProcessed').value[i].get('SecondaryProcessed').value; let j = index;">
                 <div [formGroupName]="j">
                   <label class="title" for="CodeNC">CodeNC</label>
                   <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
@@ -176,7 +176,7 @@
       <div class="action-gp">
 
         <button class="btn btn-success" type="button" (click)="addMainProcessed()">Add Main Processed Products</button>
-        <button class="btn btn-danger" type="button" (click)="removeMainProcessed(i)">Remove Main Processed Products
+        <button class="btn btn-danger" type="button" (click)="removeMainProcessed()">Remove Main Processed Products
         </button>
       </div>
     </div>
@@ -187,7 +187,7 @@
       </div>
       <div class="card-body">
         <div class="form-group" formArrayName="OfficesofPlacement"
-             *ngFor="let item of AuthForm.get('OfficesofPlacement').controls; let i = index;">
+             *ngFor="let item of AuthForm.get('OfficesofPlacement').value; let i = index;">
           <div [formGroupName]="i">
             <label class="title" for="OfficesPlacement">Offices of Placement</label>
             <select class="form-control" formControlName="OfficesPlacement" placeholder="OfficesPlacement">
@@ -200,7 +200,7 @@
       </div>
       <div class="action-gp">
         <button class="btn btn-success" type="button" (click)="addOfficesofPlacement()">Add Placement</button>
-        <button class="btn btn-danger" type="button" (click)="removeOfficesofPlacement(i)">Remove Placement</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofPlacement()">Remove Placement</button>
       </div>
       
     </div>
@@ -212,7 +212,7 @@
       </div>
       <div class="card-body">
         <div class="form-group" formArrayName="OfficesofClearance"
-             *ngFor="let item of AuthForm.get('OfficesofClearance').controls; let i = index;">
+             *ngFor="let item of AuthForm.get('OfficesofClearance').value; let i = index;">
           <div [formGroupName]="i">
             <label class="title" for="OfficesClearance">Offices of Clearance</label>
             <select class="form-control" formControlName="OfficesClearance" placeholder="OfficesClearance">
@@ -225,7 +225,7 @@
       </div>
       <div class="action-gp">
         <button class="btn btn-success" type="button" (click)="addOfficesofClearance()">Add Clearance</button>
-        <button class="btn btn-danger" type="button" (click)="removeOfficesofClearance(i)">Remove Clearance</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofClearance()">Remove Clearance</button>
       </div>
       
     </div>
@@ -237,7 +237,7 @@
       </div>
       <div class="card-body">
         <div class="form-group" formArrayName="OfficesofControl"
-             *ngFor="let item of AuthForm.get('OfficesofControl').controls; let i = index;">
+             *ngFor="let item of AuthForm.get('OfficesofControl').value; let i = index;">
           <div [formGroupName]="i">
             <label class="title" for="OfficesofControl">Offices of Control</label>
             <select class="form-control" formControlName="OfficesControl" placeholder="OfficesControl">
@@ -250,7 +250,7 @@
       </div>
       <div class="action-gp">
         <button class="btn btn-success" type="button" (click)="addOfficesofControl()">Add Control</button>
-        <button class="btn btn-danger" type="button" (click)="removeOfficesofControl(i)">Remove Control</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofControl()">Remove Control</button>
       </div>
       
     </div>

@@ -21,6 +21,6 @@ export class AuthService {
   }
 
   getUser(): Observable<any> {
-    return this.restService.getService('https://jsonplaceholder.typicode.com/posts');
+    return this.restService.getService('https://jsonplaceholder.typicode.com/users');
   }
 }
