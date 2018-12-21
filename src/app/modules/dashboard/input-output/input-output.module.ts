@@ -6,6 +6,8 @@ import {
 } from '@angular/material';
 import {InputOutputRoutingModule} from './input-output-routing.module';
 import {InputOutputComponent} from './input-output.component';
+import {StockStatusComponent} from '../../../shared/components/stock-status-component/stock-status-component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,10 +17,11 @@ import {InputOutputComponent} from './input-output.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
 
   ],
-  declarations: [InputOutputComponent]
+  declarations: [InputOutputComponent, StockStatusComponent]
 })
 export class InputOutputModule {
 }
