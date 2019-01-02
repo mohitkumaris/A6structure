@@ -1,23 +1,32 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {DataSource} from '@angular/cdk/collections';
 import {AuthService} from '../../../shared/services/auth/auth.service';
+import {MessageService} from '../../../shared/services/common/message-service';
 
 @Component({
   selector: 'app-input-output',
   templateUrl: './input-output.component.html',
   styleUrls: ['./input-output.component.scss']
 })
-export class InputOutputComponent implements OnInit {
+export class InputOutputComponent implements OnInit, OnDestroy {
   users = new ProductDataSource(this.authService);
   displayedColumns = ['name', 'email', 'phone', 'company'];
   products = [];
   title = 'Products';
   productToUpdate: any;
+  subscription: Subscription;
+  message: any;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private messageService: MessageService) {
+    this.subscription = this.messageService.getMessage().subscribe(message => {
+      this.message = message;
+    });
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
   ngOnInit() {
     this.products = this.getProducts();
   }
