@@ -1,0 +1,81 @@
+<div class="card reg-card">
+  <div class="card-header">
+    Register
+  </div>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (submit)="onSubmit(registerForm.value)">
+      <div class="form-group">
+        <label for="fName">First Name</label>
+        <input type="text" formControlName="fName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fName.errors }" />
+        <div *ngIf="submitted && f.fName.errors" class="invalid-feedback">
+          <div *ngIf="f.fName.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lName">Last Name</label>
+        <input type="text" formControlName="lName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lName.errors }" />
+        <div *ngIf="submitted && f.lName.errors" class="invalid-feedback">
+          <div *ngIf="f.lName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Email is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <p>ngDate: {{today | date:'shortDate'}}</p>
+        <p>localDate: {{today | localDate}}</p>
+        <p>ngNumber: {{val | number}}</p>
+        <p>localNumber: {{val | localNumber}}</p>
+        <p>Name:{{name | capitalize}}</p>
+        <button (click)="norway()">Norway</button>
+        <button (click)="sweden()">Sweden</button>
+        <p>Multi Option</p>
+        <app-dato-select>
+          <app-dato-option ddwn multi *ngFor="let option of options">
+            {{option}}
+          </app-dato-option>
+        </app-dato-select>
+
+        <p>No Multiple Option</p>
+        <app-dato-select>
+          <app-dato-option ddwn *ngFor="let option of options">{{option}}</app-dato-option>
+        </app-dato-select>
+        <p> Normal dropdown</p>
+        <select>
+          <option *ngFor="let option of options">{{option}}</option>
+        </select>
+
+      </div>
+      <div class="form-group">
+        <ul id="posts">
+          <li *ngFor="let post of posts">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.body }}</p>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Register</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+
+
+</div>

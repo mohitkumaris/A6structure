@@ -1,0 +1,47 @@
+.cauth-card{
+    .card{
+        margin-top: 20px;
+        .card-body{
+            padding: 1.25rem 0;
+        }
+    }
+    .form-group{
+        label.title{
+            margin-top: 1rem;
+            &:first-child{
+                margin-top: 0;
+            }
+        }
+    }
+    .form-control{
+        //margin-bottom: 1rem;
+        max-width: 500px;
+    }
+    .action-gp{
+        padding: 0 1.25rem 1.25rem;
+        .btn-success{
+            margin-right: 15px;
+        }
+        &.main{
+            padding: 40px 0 0;
+        }
+        &.root{
+            padding: 1.25rem 0;
+        }
+    }
+    > .card-body > form > .card .card-body {
+        padding: 0 0 1.25rem;
+        > .form-group {
+            padding: 1.25rem;
+            margin: 0;
+            // &:nth-child(odd){
+            //     background: rgba(0, 0, 0, 0.03);
+    
+            // }
+            &:nth-child(even){
+                background: rgba(0, 0, 0, 0.03);
+            }
+    }
+
+    }
+}

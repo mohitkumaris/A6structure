@@ -1,0 +1,53 @@
+<h1>Material Grid</h1>
+<div>
+  <mat-table [dataSource]="users">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> E-Mail</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.email}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.phone}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <mat-header-cell *matHeaderCellDef> Company</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.company.name}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></mat-row>
+  </mat-table>
+</div>
+<hr>
+<h1>
+  Input Output
+</h1>
+<div class="container">
+  <br/>
+  <h1 class="text-center">{{title}}</h1>
+  <table class="table">
+    <thead>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Stock</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of products">
+      <td>{{p.id}}</td>
+      <td>{{p.title}}</td>
+      <td>{{p.price}}</td>
+      <td>{{p.stock}}</td>
+      <td>
+        <app-stock-status [productId]='p.id' [stock]='p.stock'
+                          (stockValueChange)='changeStockValue($event)'></app-stock-status>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="message" class="alert alert-success">{{message}}</div>
+

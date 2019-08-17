@@ -1,0 +1,279 @@
+<div class="card cauth-card">
+  <div class="card-header">
+    Create Authorization
+  </div>
+  <div class="card-body">
+    <form [formGroup]="AuthForm" (submit)="onSubmit(AuthForm.value)">
+      <!--Form Data-->
+      <div class="form-group">
+        <label class="title" for="Authorization">Authorization#</label>
+        <input type="text" formControlName="Authorization" class="form-control" placeholder="Authorization#">
+
+        <label class="title" for="CustomsProcedure">Custom Procedure</label>
+        <select class="dropdown" class="form-control" formControlName="CustomsProcedure">
+          <option value="0"></option>
+          <option value="51">Perfectionnement actif</option>
+          <option value="31">réexportation</option>
+          <option value="40">mise en libre pratique</option>
+          <option value="71">autre régime</option>
+        </select>
+
+        <label class="title" for="GeographicalValidity">Geographical Validity</label>
+        <input type="text" class="form-control" formControlName="GeographicalValidity"
+               placeholder="Geographical validity" [ngClass]="{ 'is-invalid': submitted && f.GeographicalValidity.errors }"
+               >
+               <div *ngIf="submitted && f.GeographicalValidity.errors" class="invalid-feedback">
+                <div *ngIf="f.GeographicalValidity.errors.required">Geographical validity is required</div>
+              </div>
+
+        <label class="title" for="StartDate">Start Date</label>
+        <input type="date" class="form-control" formControlName="StartDate" placeholder="Date of start of validity" [ngClass]="{ 'is-invalid': submitted && f.StartDate.errors }">
+        <div *ngIf="submitted && f.StartDate.errors" class="invalid-feedback">
+          <div *ngIf="f.StartDate.errors.required">Start Date is required</div>
+        </div>
+
+        <label class="title" for="ExpirationDate">Expiration Date</label>
+        <input type="date" class="form-control" formControlName="ExpirationDate"
+               (change)="checkDate($event.target.value)" placeholder="Expiration date of validity"
+               [ngClass]="{ 'is-invalid': submitted && f.ExpirationDate.errors }">
+        <div *ngIf="submitted && f.ExpirationDate.errors" class="invalid-feedback">
+          <div *ngIf="f.ExpirationDate.errors.required">Expiration Date is required</div>
+        </div>
+
+      </div>
+      <!--Form Array: Goods-->
+    <div class="card">
+      <div class="card-header">Goods to be Placed</div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="Goods"
+             *ngFor="let item of AuthForm.get('Goods').value;let i = index; ">
+          <div [formGroupName]="i">
+
+            <label class="title" for="CodeNC">CodeNC</label>
+            <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
+              <option value="0"></option>
+              <option value="1">CodeNC1</option>
+              <option value="2">CodeNC2</option>
+              <option value="3">CodeNC3</option>
+            </select>
+
+
+          </div>
+
+        </div>
+        <div class="action-gp">
+          <button class="btn btn-success" type="button" (click)="addGoods()">Add Goods</button>
+          <button class="btn btn-danger" type="button" (click)="removeGoods()">Remove Goods</button>
+        </div>
+
+      </div>
+    </div>
+      <div class="card">
+        <div class="card-header">Goods to be Placed: Limits to be observed</div>
+        <div class="card-body">
+          <label class="title" for="Quantity">Quantity</label>
+          <input type="number" class="form-control" formControlName="Quantity" placeholder="Quantity"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Quantity').errors }">
+          <div *ngIf="submitted && AuthForm.get('Quantity').errors" class="invalid-feedback">
+            <div>Quantity is required</div>
+          </div>
+
+          <label class="title" for="Period">Period</label>
+          <select class="form-control" formControlName="Period"
+                  [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Period').errors }">
+            <option value="0"></option>
+            <option value="1">Days</option>
+            <option value="2">Month</option>
+            <option value="3">Year</option>
+          </select>
+          <div *ngIf="submitted && AuthForm.get('Period').errors" class="invalid-feedback">
+            <div>Period is required</div>
+          </div>
+
+          <label class="title" for="Number">Number</label>
+          <input type="number" class="form-control" formControlName="Number" placeholder="Number"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Number').errors }">
+          <div *ngIf="submitted && AuthForm.get('Number').errors" class="invalid-feedback">
+            <div>Number is required</div>
+          </div>
+
+          <label class="title" for="UnitOfMeasure">Unit Of Measure</label>
+          <input type="text" class="form-control" formControlName="UnitOfMeasure" placeholder="UnitOfMeasure"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('UnitOfMeasure').errors }">
+          <div *ngIf="submitted && AuthForm.get('UnitOfMeasure').errors" class="invalid-feedback">
+            <div>UnitOfMeasure is required</div>
+          </div>
+
+          <label class="title" for="Value">Value</label>
+          <input type="number" class="form-control" formControlName="Value" placeholder="Value"
+                 [ngClass]="{ 'is-invalid': submitted && AuthForm.get('Value').errors }">
+          <div *ngIf="submitted && AuthForm.get('Value').errors" class="invalid-feedback">
+            <div>Value is required</div>
+          </div>
+        </div>
+      </div>
+      <!--Form Array: Main Processed-->
+    <div class="card">
+      <div class="card-header">Goods to be Processed</div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="MainProcessed"
+             *ngFor="let item of AuthForm.get('MainProcessed').value; let i = index;">
+          <ng-container [formGroupName]="i">
+            <div>
+              <label class="title" for="CodeNC">CodeNC</label>
+              <select class="form-control" formControlName="CodeNC" placeholder="CodeNC">
+                <option value="0"></option>
+                <option value="1">CodeNC1</option>
+                <option value="2">CodeNC2</option>
+                <option value="3">CodeNC3</option>
+              </select>
+              <label class="title" for="Designation">Designation</label>
+              <input type="text" class="form-control" formControlName="Designation" placeholder="Designation">
+              <label class="title" for="RateofReturn">Rate of Return</label>
+              <input type="text" class="form-control" formControlName="RateofReturn">
+              <label class="title" for="Ratedeterminationmethod">Rate determination method</label>
+              <input type="text" class="form-control" formControlName="Ratedeterminationmethod" placeholder="Rate determination method">
+              <label class="title" for="ProcessingPlace">Processing Place</label>
+              <input type="text" class="form-control" formControlName="ProcessingPlace" placeholder="Processing Place">
+            </div>
+          <div class="card">
+            <div class="card-header">Secondary Products to be Processed</div>
+            <div class="card-body">
+              <div class="form-group" formArrayName="SecondaryProcessed"
+                   *ngFor="let secondaryProccessedItem of AuthForm.get('MainProcessed').value[i].get('SecondaryProcessed').value; let j = index;">
+                <div [formGroupName]="j">
+                  <label class="title" for="CodeNC">CodeNC</label>
+                  <select class="form-control" formControlName="CodeNCSecondary" placeholder="CodeNC">
+                    <option value="0"></option>
+                    <option value="1">CodeNC1</option>
+                    <option value="2">CodeNC2</option>
+                    <option value="3">CodeNC3</option>
+                  </select>
+                  <label class="title" for="Designation">Designation</label>
+                  <input type="text" class="form-control" formControlName="DesignationSecondary" placeholder="Designation">
+                  <label class="title" for="RateofReturn">Rate of Return</label>
+                  <input type="text" class="form-control" formControlName="RateofReturnSecondary">
+                  <label class="title" for="Ratedeterminationmethod">Rate determination method</label>
+                  <input type="text" class="form-control" formControlName="RatedeterminationmethodSecondary"
+                         placeholder="Rate determination method">
+                </div>
+                <div class="action-gp main">
+                  <button class="btn btn-success" type="button" (click)="addMainSecondaryProcessed(i)">Add Secondary
+                    Processed Products
+                  </button>
+                  <button class="btn btn-danger" type="button" (click)="removeMainSecondaryProcessed(j)">Remove
+                    Secondary Processed Products
+                  </button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          </ng-container>
+        </div>
+      </div>
+      <div class="action-gp">
+
+        <button class="btn btn-success" type="button" (click)="addMainProcessed()">Add Main Processed Products</button>
+        <button class="btn btn-danger" type="button" (click)="removeMainProcessed()">Remove Main Processed Products
+        </button>
+      </div>
+    </div>
+      <!-- Office of Placement -->
+    <div class="card">
+      <div class="card-header">
+        Offices of Placement
+      </div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="OfficesofPlacement"
+             *ngFor="let item of AuthForm.get('OfficesofPlacement').value; let i = index;">
+          <div [formGroupName]="i">
+            <label class="title" for="OfficesPlacement">Offices of Placement</label>
+            <select class="form-control" formControlName="OfficesPlacement" placeholder="OfficesPlacement">
+              <option value="0"></option>
+              <option value="1">Code Office</option>
+              <option value="2">Office Label</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="action-gp">
+        <button class="btn btn-success" type="button" (click)="addOfficesofPlacement()">Add Placement</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofPlacement()">Remove Placement</button>
+      </div>
+      
+    </div>
+      <!-- Ended -->
+      <!-- Office of Clearance -->
+    <div class="card">
+      <div class="card-header">
+        Offices of Clearance
+      </div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="OfficesofClearance"
+             *ngFor="let item of AuthForm.get('OfficesofClearance').value; let i = index;">
+          <div [formGroupName]="i">
+            <label class="title" for="OfficesClearance">Offices of Clearance</label>
+            <select class="form-control" formControlName="OfficesClearance" placeholder="OfficesClearance">
+              <option value="0"></option>
+              <option value="1">Code Office</option>
+              <option value="2">Office Label</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="action-gp">
+        <button class="btn btn-success" type="button" (click)="addOfficesofClearance()">Add Clearance</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofClearance()">Remove Clearance</button>
+      </div>
+      
+    </div>
+      <!-- Ended -->
+      <!-- Office of Clearance -->
+    <div class="card">
+      <div class="card-header">
+        Offices of Control
+      </div>
+      <div class="card-body">
+        <div class="form-group" formArrayName="OfficesofControl"
+             *ngFor="let item of AuthForm.get('OfficesofControl').value; let i = index;">
+          <div [formGroupName]="i">
+            <label class="title" for="OfficesofControl">Offices of Control</label>
+            <select class="form-control" formControlName="OfficesControl" placeholder="OfficesControl">
+              <option value="0"></option>
+              <option value="1">Code Office</option>
+              <option value="2">Office Label</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="action-gp">
+        <button class="btn btn-success" type="button" (click)="addOfficesofControl()">Add Control</button>
+        <button class="btn btn-danger" type="button" (click)="removeOfficesofControl()">Remove Control</button>
+      </div>
+      
+    </div>
+      <div class="card">
+        <div class="card-header">
+          Guarantee
+        </div>
+        <div class="card-body">
+          <input type="number" formControlName="ReferenceAmount" class="form-control" placeholder="ReferenceAmount">
+          <select class="form-control" formControlName="CurrencyUsed" placeholder="CurrencyUsed">
+            <option value="0"></option>
+            <option value="1">Currency 1</option>
+            <option value="2">Currency 2</option>
+          </select>
+        </div>
+      </div>
+      <!-- Ended -->
+      <div class="action-gp root">
+        <button type="submit" class="btn btn-primary">
+          Create Authorization
+        </button><!--[disabled]="AuthForm.invalid" (click)="save(AuthForm.value)"-->
+      </div>
+    </form>
+  </div>
+
+</div>
